@@ -32,11 +32,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.welcomeMessage = new System.Windows.Forms.TextBox();
+            this.continueButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(348, 66);
+            this.textBox1.Location = new System.Drawing.Point(350, 187);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 26);
             this.textBox1.TabIndex = 0;
@@ -49,15 +51,37 @@
             this.textBox2.Size = new System.Drawing.Size(235, 26);
             this.textBox2.TabIndex = 1;
             // 
+            // welcomeMessage
+            // 
+            this.welcomeMessage.Location = new System.Drawing.Point(284, 32);
+            this.welcomeMessage.Multiline = true;
+            this.welcomeMessage.Name = "welcomeMessage";
+            this.welcomeMessage.Size = new System.Drawing.Size(232, 49);
+            this.welcomeMessage.TabIndex = 2;
+            this.welcomeMessage.Text = "Please ensure that the CPU is connected before continuing.";
+            this.welcomeMessage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // continueButton
+            // 
+            this.continueButton.Location = new System.Drawing.Point(336, 115);
+            this.continueButton.Name = "continueButton";
+            this.continueButton.Size = new System.Drawing.Size(129, 47);
+            this.continueButton.TabIndex = 3;
+            this.continueButton.Text = "Continue";
+            this.continueButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.continueButton);
+            this.Controls.Add(this.welcomeMessage);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Welcome";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,6 +92,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox welcomeMessage;
+        private System.Windows.Forms.Button continueButton;
     }
 }
 

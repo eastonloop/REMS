@@ -29,6 +29,9 @@ namespace Environment_Monitoring_System_Interface
         public bool isConnectedToCU = false;
         string data;
 
+        //start Eric storage of data coming in
+        List<String> sensorDataList;
+
         private async Task<string> ReadResponse()
         {
             using (var reader = new StreamReader(serialPort1.BaseStream))
@@ -102,6 +105,9 @@ namespace Environment_Monitoring_System_Interface
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             data = serialPort1.ReadLine();
+
+            //test data storage
+
 
             textBox2.Invoke((MethodInvoker)delegate
             {
@@ -181,91 +187,5 @@ namespace Environment_Monitoring_System_Interface
             }
 
         }
-
-        //start Eric Excel Testing
-        /*
-        void SaveAnswers(List<String> sensorData)
-        {
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-
-            // Create a new Excel package
-            using (ExcelPackage package = new ExcelPackage())
-            {
-                ExcelWorksheet worksheet;
-                // Check if the worksheet already exists
-                if (package.Workbook.Worksheets.Count == 0)
-                {
-                    // Create a new worksheet
-                    worksheet = package.Workbook.Worksheets.Add("Sensor Data");
-
-                    // Write the current date to the first row, first column
-                    worksheet.Cells[1, 1].Value = DateTime.Now.ToString("MM-dd-yyyy");
-
-                    int teamNameColumn = 2;
-                    int questionNumberColumn = 1;
-
-                    // Set column headers for team names and display scores
-                    for (int i = 0; i < 6; i++)
-                    {
-                        string tempstr = "Team " + (i + 1);
-                        worksheet.Cells[2, teamNameColumn].Value = tempstr;
-                        teamNameColumn++;
-
-                        //adds score to the correct column
-                        if (teamInfo.TryGetValue(tempstr, out Tuple<string, string, int, int, string> teamTuple))
-                        {
-                            int score = teamTuple.Item3;
-                            string customName = teamTuple.Item2;
-                            worksheet.Cells[highestQuestionReached + 3, i + 2].Value = score;
-                            worksheet.Cells[1, i + 2].Value = customName;
-                        }
-                        else
-                        {
-                            worksheet.Cells[highestQuestionReached + 3, i + 2].Value = 0;
-                        }
-                    }
-
-                    // Set column header for question number
-                    worksheet.Cells[2, questionNumberColumn].Value = "Question";
-
-                    //Write "score" in column 1, row = highestQuestionReached + 3
-                    worksheet.Cells[highestQuestionReached + 3, 1].Value = "Score";
-                }
-                else
-                {
-                    // Get the existing worksheet
-                    worksheet = package.Workbook.Worksheets[0];
-                }
-
-                //adds question numbers to question column
-                for (int l = 0; l < highestQuestionReached; l++)
-                {
-                    worksheet.Cells[l + 3, 1].Value = l + 1;
-                }
-
-                // Write answers for each team
-                for (int j = 0; j < 6; j++)
-
-                {
-                    string teamName = "Team " + (j + 1);
-                    for (int i = 0; i < answers.Count; i++)
-                    {
-                        if (answers[i].TeamName == teamName)
-                        {
-                            int row = answers[i].QuestionNumber + 2;
-                            worksheet.Cells[row, j + 2].Value = answers[i].TeamAnswer;
-
-                        }
-                    }
-                }
-
-
-                // Save the Excel file
-                package.SaveAs(new FileInfo(filePath));
-            }
-        }
-        
-    }
-    */
     }
 }

@@ -32,7 +32,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.welcomeMessage = new System.Windows.Forms.TextBox();
+            this.welcomeMessageBox = new System.Windows.Forms.TextBox();
             this.continueButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -51,15 +51,15 @@
             this.textBox2.Size = new System.Drawing.Size(235, 26);
             this.textBox2.TabIndex = 1;
             // 
-            // welcomeMessage
+            // welcomeMessageBox
             // 
-            this.welcomeMessage.Location = new System.Drawing.Point(284, 32);
-            this.welcomeMessage.Multiline = true;
-            this.welcomeMessage.Name = "welcomeMessage";
-            this.welcomeMessage.Size = new System.Drawing.Size(232, 49);
-            this.welcomeMessage.TabIndex = 2;
-            this.welcomeMessage.Text = "Please ensure that the CPU is connected before continuing.";
-            this.welcomeMessage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.welcomeMessageBox.Location = new System.Drawing.Point(284, 32);
+            this.welcomeMessageBox.Multiline = true;
+            this.welcomeMessageBox.Name = "welcomeMessageBox";
+            this.welcomeMessageBox.Size = new System.Drawing.Size(232, 49);
+            this.welcomeMessageBox.TabIndex = 2;
+            this.welcomeMessageBox.Text = "Please ensure that the CPU is connected before continuing.";
+            this.welcomeMessageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // continueButton
             // 
@@ -77,7 +77,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.continueButton);
-            this.Controls.Add(this.welcomeMessage);
+            this.Controls.Add(this.welcomeMessageBox);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
@@ -92,7 +92,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox welcomeMessage;
+        private System.Windows.Forms.TextBox welcomeMessageBox;
         private System.Windows.Forms.Button continueButton;
     }
 }

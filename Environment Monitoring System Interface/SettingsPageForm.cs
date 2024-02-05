@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Environment_Monitoring_System_Interface
 {
-    public partial class HomePageForm : Form
+    public partial class SettingsPageForm : Form
     {
-        public HomePageForm()
+        public SettingsPageForm()
         {
             InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox11_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

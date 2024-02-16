@@ -20,6 +20,7 @@ using DocumentFormat.OpenXml.Vml;
 
 namespace Environment_Monitoring_System_Interface
 {
+
     public partial class Form1 : Form
     {
         string selectedCOMPort;
@@ -27,7 +28,8 @@ namespace Environment_Monitoring_System_Interface
 
         bool ArduinoConnected;
         public bool isConnectedToCU = false;
-        string data;
+        public string data;
+        bool stop = false;
 
         //start Eric storage of data coming in
         List<String> sensorDataList;
@@ -50,7 +52,7 @@ namespace Environment_Monitoring_System_Interface
         }
         private async void autoConnectCOMPort()
         {
-            isConnectedToCU = false;
+            isConnectedToCU = true;     //DON'T KEEP IT LIKE THIS
             string[] comPorts = GetCOMPorts();
 
             foreach (string port in comPorts)
@@ -78,12 +80,13 @@ namespace Environment_Monitoring_System_Interface
 
                     await Task.WhenAny(responseTask, timeoutTask);
 
-                    if (responseTask.IsCompleted && responseTask.Result == "Connected")
+                    if (true/*responseTask.IsCompleted && responseTask.Result == "Connected"*/)
                     {
                         serialPort1.Open();
                         isConnectedToCU = true;
                         textBox1.Text = "Connected";
-                        serialPort1.DataReceived += SerialPort1_DataReceived;
+                        //if (stop)
+                        //    serialPort1.DataReceived += SerialPort1_DataReceived;
                         return;
                     }
                 }
@@ -105,14 +108,6 @@ namespace Environment_Monitoring_System_Interface
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             data = serialPort1.ReadLine();
-
-            //test data storage
-
-
-            textBox2.Invoke((MethodInvoker)delegate
-            {
-                textBox2.Text = data;
-            });
 
         }
 
@@ -186,6 +181,27 @@ namespace Environment_Monitoring_System_Interface
                 }
             }
 
+        }
+     
+        private void continueButton_Click_1(object sender, EventArgs e)
+        {
+            if (isConnectedToCU)
+            {
+                HomePageForm form = new HomePageForm
+                {
+                    SerialPort = serialPort1
+                };
+
+                stop = true;                
+
+              //  Task.Delay(500);
+                this.Hide();
+
+                form.ShowDialog();           
+                
+              //  Task.Delay(500);
+              //  this.Dispose();
+            }
         }
     }
 }

@@ -69,6 +69,7 @@
             this.continueButton.TabIndex = 3;
             this.continueButton.Text = "Continue";
             this.continueButton.UseVisualStyleBackColor = true;
+            this.continueButton.Click += new System.EventHandler(this.continueButton_Click_1);
             // 
             // Form1
             // 

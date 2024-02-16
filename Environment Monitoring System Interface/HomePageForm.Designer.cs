@@ -69,7 +69,7 @@
             this.hum6Label = new System.Windows.Forms.Label();
             this.hum7Label = new System.Windows.Forms.Label();
             this.hum8Label = new System.Windows.Forms.Label();
-            this.homeSettingsButton = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // sensorFeedLabel
@@ -173,7 +173,6 @@
             this.temp1Box.TabIndex = 9;
             this.temp1Box.Text = "0";
             this.temp1Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.temp1Box.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // temp1Label
             // 
@@ -486,22 +485,23 @@
             this.hum8Label.TabIndex = 40;
             this.hum8Label.Text = "%";
             // 
-            // homeSettingsButton
+            // SettingsButton
             // 
-            this.homeSettingsButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeSettingsButton.Location = new System.Drawing.Point(712, 383);
-            this.homeSettingsButton.Name = "homeSettingsButton";
-            this.homeSettingsButton.Size = new System.Drawing.Size(139, 58);
-            this.homeSettingsButton.TabIndex = 41;
-            this.homeSettingsButton.Text = "Settings";
-            this.homeSettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SettingsButton.Location = new System.Drawing.Point(712, 383);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(139, 58);
+            this.SettingsButton.TabIndex = 41;
+            this.SettingsButton.Text = "Settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // HomePageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 468);
-            this.Controls.Add(this.homeSettingsButton);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.hum8Label);
             this.Controls.Add(this.hum7Label);
             this.Controls.Add(this.hum6Label);
@@ -547,6 +547,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "HomePageForm";
             this.Text = "Home Page";
+            this.Load += new System.EventHandler(this.HomePageForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,6 +596,7 @@
         private System.Windows.Forms.Label hum6Label;
         private System.Windows.Forms.Label hum7Label;
         private System.Windows.Forms.Label hum8Label;
-        private System.Windows.Forms.Button homeSettingsButton;
+        private System.Windows.Forms.Button SettingsButton;
+       
     }
 }

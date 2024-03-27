@@ -70,6 +70,26 @@
             this.hum7Label = new System.Windows.Forms.Label();
             this.hum8Label = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
+            this.alertLabel = new System.Windows.Forms.Label();
+            this.alertText = new System.Windows.Forms.Label();
+            this.legendOnLabel = new System.Windows.Forms.Label();
+            this.legendOffLabel = new System.Windows.Forms.Label();
+            this.bat1Label = new System.Windows.Forms.Label();
+            this.bat2Label = new System.Windows.Forms.Label();
+            this.bat3Label = new System.Windows.Forms.Label();
+            this.bat4Label = new System.Windows.Forms.Label();
+            this.bat5Label = new System.Windows.Forms.Label();
+            this.bat6Label = new System.Windows.Forms.Label();
+            this.bat7Label = new System.Windows.Forms.Label();
+            this.bat8Label = new System.Windows.Forms.Label();
+            this.sensor1NameBox = new System.Windows.Forms.TextBox();
+            this.sensor2NameBox = new System.Windows.Forms.TextBox();
+            this.sensor3NameBox = new System.Windows.Forms.TextBox();
+            this.sensor4NameBox = new System.Windows.Forms.TextBox();
+            this.sensor5NameBox = new System.Windows.Forms.TextBox();
+            this.sensor6NameBox = new System.Windows.Forms.TextBox();
+            this.sensor7NameBox = new System.Windows.Forms.TextBox();
+            this.sensor8NameBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // sensorFeedLabel
@@ -77,7 +97,7 @@
             this.sensorFeedLabel.AutoSize = true;
             this.sensorFeedLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sensorFeedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.sensorFeedLabel.Location = new System.Drawing.Point(377, 34);
+            this.sensorFeedLabel.Location = new System.Drawing.Point(377, 24);
             this.sensorFeedLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.sensorFeedLabel.Name = "sensorFeedLabel";
             this.sensorFeedLabel.Size = new System.Drawing.Size(150, 43);
@@ -87,82 +107,82 @@
             // sensor1Label
             // 
             this.sensor1Label.AutoSize = true;
-            this.sensor1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor1Label.Location = new System.Drawing.Point(11, 87);
+            this.sensor1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor1Label.Location = new System.Drawing.Point(11, 60);
             this.sensor1Label.Name = "sensor1Label";
-            this.sensor1Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor1Label.Size = new System.Drawing.Size(62, 25);
             this.sensor1Label.TabIndex = 1;
-            this.sensor1Label.Text = "Sensor 1";
+            this.sensor1Label.Text = "          ";
             // 
             // sensor2Label
             // 
             this.sensor2Label.AutoSize = true;
-            this.sensor2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor2Label.Location = new System.Drawing.Point(124, 87);
+            this.sensor2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor2Label.Location = new System.Drawing.Point(124, 60);
             this.sensor2Label.Name = "sensor2Label";
-            this.sensor2Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor2Label.Size = new System.Drawing.Size(62, 25);
             this.sensor2Label.TabIndex = 2;
-            this.sensor2Label.Text = "Sensor 2";
+            this.sensor2Label.Text = "          ";
             // 
             // sensor3Label
             // 
             this.sensor3Label.AutoSize = true;
-            this.sensor3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor3Label.Location = new System.Drawing.Point(236, 87);
+            this.sensor3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor3Label.Location = new System.Drawing.Point(236, 60);
             this.sensor3Label.Name = "sensor3Label";
-            this.sensor3Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor3Label.Size = new System.Drawing.Size(62, 25);
             this.sensor3Label.TabIndex = 3;
-            this.sensor3Label.Text = "Sensor 3";
+            this.sensor3Label.Text = "          ";
             // 
             // sensor4Label
             // 
             this.sensor4Label.AutoSize = true;
-            this.sensor4Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor4Label.Location = new System.Drawing.Point(348, 87);
+            this.sensor4Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor4Label.Location = new System.Drawing.Point(348, 60);
             this.sensor4Label.Name = "sensor4Label";
-            this.sensor4Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor4Label.Size = new System.Drawing.Size(62, 25);
             this.sensor4Label.TabIndex = 4;
-            this.sensor4Label.Text = "Sensor 4";
+            this.sensor4Label.Text = "          ";
             // 
             // sensor5Label
             // 
             this.sensor5Label.AutoSize = true;
-            this.sensor5Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor5Label.Location = new System.Drawing.Point(460, 87);
+            this.sensor5Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor5Label.Location = new System.Drawing.Point(465, 60);
             this.sensor5Label.Name = "sensor5Label";
-            this.sensor5Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor5Label.Size = new System.Drawing.Size(62, 25);
             this.sensor5Label.TabIndex = 5;
-            this.sensor5Label.Text = "Sensor 5";
+            this.sensor5Label.Text = "          ";
             // 
             // sensor6Label
             // 
             this.sensor6Label.AutoSize = true;
-            this.sensor6Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor6Label.Location = new System.Drawing.Point(572, 87);
+            this.sensor6Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor6Label.Location = new System.Drawing.Point(572, 60);
             this.sensor6Label.Name = "sensor6Label";
-            this.sensor6Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor6Label.Size = new System.Drawing.Size(62, 25);
             this.sensor6Label.TabIndex = 6;
-            this.sensor6Label.Text = "Sensor 6";
+            this.sensor6Label.Text = "          ";
             // 
             // sensor7Label
             // 
             this.sensor7Label.AutoSize = true;
-            this.sensor7Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor7Label.Location = new System.Drawing.Point(684, 87);
+            this.sensor7Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor7Label.Location = new System.Drawing.Point(686, 60);
             this.sensor7Label.Name = "sensor7Label";
-            this.sensor7Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor7Label.Size = new System.Drawing.Size(62, 25);
             this.sensor7Label.TabIndex = 7;
-            this.sensor7Label.Text = "Sensor 7";
+            this.sensor7Label.Text = "          ";
             // 
             // sensor8Label
             // 
             this.sensor8Label.AutoSize = true;
-            this.sensor8Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor8Label.Location = new System.Drawing.Point(796, 87);
+            this.sensor8Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor8Label.Location = new System.Drawing.Point(796, 60);
             this.sensor8Label.Name = "sensor8Label";
-            this.sensor8Label.Size = new System.Drawing.Size(73, 20);
+            this.sensor8Label.Size = new System.Drawing.Size(62, 25);
             this.sensor8Label.TabIndex = 8;
-            this.sensor8Label.Text = "Sensor 8";
+            this.sensor8Label.Text = "          ";
             // 
             // temp1Box
             // 
@@ -313,7 +333,6 @@
             this.temp7Box.TabIndex = 23;
             this.temp7Box.Text = "0";
             this.temp7Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.temp7Box.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
             // hum7Box
             // 
@@ -496,11 +515,224 @@
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
+            // alertLabel
+            // 
+            this.alertLabel.AutoSize = true;
+            this.alertLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.alertLabel.Location = new System.Drawing.Point(120, 272);
+            this.alertLabel.Name = "alertLabel";
+            this.alertLabel.Size = new System.Drawing.Size(98, 96);
+            this.alertLabel.TabIndex = 42;
+            this.alertLabel.Text = "            \r\n            \r\n            ";
+            // 
+            // alertText
+            // 
+            this.alertText.AutoSize = true;
+            this.alertText.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alertText.Location = new System.Drawing.Point(120, 383);
+            this.alertText.Name = "alertText";
+            this.alertText.Size = new System.Drawing.Size(0, 26);
+            this.alertText.TabIndex = 43;
+            // 
+            // legendOnLabel
+            // 
+            this.legendOnLabel.AutoSize = true;
+            this.legendOnLabel.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.legendOnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.legendOnLabel.Location = new System.Drawing.Point(612, 30);
+            this.legendOnLabel.Name = "legendOnLabel";
+            this.legendOnLabel.Size = new System.Drawing.Size(69, 20);
+            this.legendOnLabel.TabIndex = 44;
+            this.legendOnLabel.Text = "ESM On";
+            // 
+            // legendOffLabel
+            // 
+            this.legendOffLabel.AutoSize = true;
+            this.legendOffLabel.BackColor = System.Drawing.Color.Gold;
+            this.legendOffLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.legendOffLabel.Location = new System.Drawing.Point(687, 30);
+            this.legendOffLabel.Name = "legendOffLabel";
+            this.legendOffLabel.Size = new System.Drawing.Size(70, 20);
+            this.legendOffLabel.TabIndex = 45;
+            this.legendOffLabel.Text = "ESM Off";
+            // 
+            // bat1Label
+            // 
+            this.bat1Label.AutoSize = true;
+            this.bat1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat1Label.Location = new System.Drawing.Point(12, 220);
+            this.bat1Label.Name = "bat1Label";
+            this.bat1Label.Size = new System.Drawing.Size(0, 20);
+            this.bat1Label.TabIndex = 46;
+            // 
+            // bat2Label
+            // 
+            this.bat2Label.AutoSize = true;
+            this.bat2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat2Label.Location = new System.Drawing.Point(119, 220);
+            this.bat2Label.Name = "bat2Label";
+            this.bat2Label.Size = new System.Drawing.Size(0, 20);
+            this.bat2Label.TabIndex = 47;
+            // 
+            // bat3Label
+            // 
+            this.bat3Label.AutoSize = true;
+            this.bat3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat3Label.Location = new System.Drawing.Point(236, 220);
+            this.bat3Label.Name = "bat3Label";
+            this.bat3Label.Size = new System.Drawing.Size(0, 20);
+            this.bat3Label.TabIndex = 48;
+            // 
+            // bat4Label
+            // 
+            this.bat4Label.AutoSize = true;
+            this.bat4Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat4Label.Location = new System.Drawing.Point(348, 220);
+            this.bat4Label.Name = "bat4Label";
+            this.bat4Label.Size = new System.Drawing.Size(0, 20);
+            this.bat4Label.TabIndex = 49;
+            // 
+            // bat5Label
+            // 
+            this.bat5Label.AutoSize = true;
+            this.bat5Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat5Label.Location = new System.Drawing.Point(460, 220);
+            this.bat5Label.Name = "bat5Label";
+            this.bat5Label.Size = new System.Drawing.Size(0, 20);
+            this.bat5Label.TabIndex = 50;
+            // 
+            // bat6Label
+            // 
+            this.bat6Label.AutoSize = true;
+            this.bat6Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat6Label.Location = new System.Drawing.Point(573, 220);
+            this.bat6Label.Name = "bat6Label";
+            this.bat6Label.Size = new System.Drawing.Size(0, 20);
+            this.bat6Label.TabIndex = 51;
+            // 
+            // bat7Label
+            // 
+            this.bat7Label.AutoSize = true;
+            this.bat7Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat7Label.Location = new System.Drawing.Point(684, 220);
+            this.bat7Label.Name = "bat7Label";
+            this.bat7Label.Size = new System.Drawing.Size(0, 20);
+            this.bat7Label.TabIndex = 52;
+            // 
+            // bat8Label
+            // 
+            this.bat8Label.AutoSize = true;
+            this.bat8Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bat8Label.Location = new System.Drawing.Point(797, 220);
+            this.bat8Label.Name = "bat8Label";
+            this.bat8Label.Size = new System.Drawing.Size(0, 20);
+            this.bat8Label.TabIndex = 53;
+            // 
+            // sensor1NameBox
+            // 
+            this.sensor1NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor1NameBox.Location = new System.Drawing.Point(16, 84);
+            this.sensor1NameBox.Name = "sensor1NameBox";
+            this.sensor1NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor1NameBox.TabIndex = 54;
+            this.sensor1NameBox.Text = "Sensor 1";
+            this.sensor1NameBox.TextChanged += new System.EventHandler(this.sensor1NameBox_TextChanged);
+            // 
+            // sensor2NameBox
+            // 
+            this.sensor2NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor2NameBox.Location = new System.Drawing.Point(128, 84);
+            this.sensor2NameBox.Name = "sensor2NameBox";
+            this.sensor2NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor2NameBox.TabIndex = 55;
+            this.sensor2NameBox.Text = "Sensor 2";
+            this.sensor2NameBox.TextChanged += new System.EventHandler(this.sensor2NameBox_TextChanged);
+            // 
+            // sensor3NameBox
+            // 
+            this.sensor3NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor3NameBox.Location = new System.Drawing.Point(240, 84);
+            this.sensor3NameBox.Name = "sensor3NameBox";
+            this.sensor3NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor3NameBox.TabIndex = 56;
+            this.sensor3NameBox.Text = "Sensor 3";
+            this.sensor3NameBox.TextChanged += new System.EventHandler(this.sensor3NameBox_TextChanged);
+            // 
+            // sensor4NameBox
+            // 
+            this.sensor4NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor4NameBox.Location = new System.Drawing.Point(352, 84);
+            this.sensor4NameBox.Name = "sensor4NameBox";
+            this.sensor4NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor4NameBox.TabIndex = 57;
+            this.sensor4NameBox.Text = "Sensor 4";
+            this.sensor4NameBox.TextChanged += new System.EventHandler(this.sensor4NameBox_TextChanged);
+            // 
+            // sensor5NameBox
+            // 
+            this.sensor5NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor5NameBox.Location = new System.Drawing.Point(464, 84);
+            this.sensor5NameBox.Name = "sensor5NameBox";
+            this.sensor5NameBox.Size = new System.Drawing.Size(90, 30);
+            this.sensor5NameBox.TabIndex = 58;
+            this.sensor5NameBox.Text = "Sensor 5";
+            this.sensor5NameBox.TextChanged += new System.EventHandler(this.sensor5NameBox_TextChanged);
+            // 
+            // sensor6NameBox
+            // 
+            this.sensor6NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor6NameBox.Location = new System.Drawing.Point(576, 84);
+            this.sensor6NameBox.Name = "sensor6NameBox";
+            this.sensor6NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor6NameBox.TabIndex = 59;
+            this.sensor6NameBox.Text = "Sensor 6";
+            this.sensor6NameBox.TextChanged += new System.EventHandler(this.sensor6NameBox_TextChanged);
+            // 
+            // sensor7NameBox
+            // 
+            this.sensor7NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor7NameBox.Location = new System.Drawing.Point(688, 84);
+            this.sensor7NameBox.Name = "sensor7NameBox";
+            this.sensor7NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor7NameBox.TabIndex = 60;
+            this.sensor7NameBox.Text = "Sensor 7";
+            this.sensor7NameBox.TextChanged += new System.EventHandler(this.sensor7NameBox_TextChanged);
+            // 
+            // sensor8NameBox
+            // 
+            this.sensor8NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sensor8NameBox.Location = new System.Drawing.Point(800, 84);
+            this.sensor8NameBox.Name = "sensor8NameBox";
+            this.sensor8NameBox.Size = new System.Drawing.Size(89, 30);
+            this.sensor8NameBox.TabIndex = 61;
+            this.sensor8NameBox.Text = "Sensor 8";
+            this.sensor8NameBox.TextChanged += new System.EventHandler(this.sensor8NameBox_TextChanged);
+            // 
             // HomePageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 468);
+            this.ClientSize = new System.Drawing.Size(927, 478);
+            this.Controls.Add(this.sensor8NameBox);
+            this.Controls.Add(this.sensor7NameBox);
+            this.Controls.Add(this.sensor6NameBox);
+            this.Controls.Add(this.sensor5NameBox);
+            this.Controls.Add(this.sensor4NameBox);
+            this.Controls.Add(this.sensor3NameBox);
+            this.Controls.Add(this.sensor2NameBox);
+            this.Controls.Add(this.sensor1NameBox);
+            this.Controls.Add(this.bat8Label);
+            this.Controls.Add(this.bat7Label);
+            this.Controls.Add(this.bat6Label);
+            this.Controls.Add(this.bat5Label);
+            this.Controls.Add(this.bat4Label);
+            this.Controls.Add(this.bat3Label);
+            this.Controls.Add(this.bat2Label);
+            this.Controls.Add(this.bat1Label);
+            this.Controls.Add(this.legendOffLabel);
+            this.Controls.Add(this.legendOnLabel);
+            this.Controls.Add(this.alertText);
+            this.Controls.Add(this.alertLabel);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.hum8Label);
             this.Controls.Add(this.hum7Label);
@@ -597,6 +829,25 @@
         private System.Windows.Forms.Label hum7Label;
         private System.Windows.Forms.Label hum8Label;
         private System.Windows.Forms.Button SettingsButton;
-       
+        private System.Windows.Forms.Label alertLabel;
+        private System.Windows.Forms.Label alertText;
+        private System.Windows.Forms.Label legendOnLabel;
+        private System.Windows.Forms.Label legendOffLabel;
+        private System.Windows.Forms.Label bat1Label;
+        private System.Windows.Forms.Label bat2Label;
+        private System.Windows.Forms.Label bat3Label;
+        private System.Windows.Forms.Label bat4Label;
+        private System.Windows.Forms.Label bat5Label;
+        private System.Windows.Forms.Label bat6Label;
+        private System.Windows.Forms.Label bat7Label;
+        private System.Windows.Forms.Label bat8Label;
+        private System.Windows.Forms.TextBox sensor1NameBox;
+        private System.Windows.Forms.TextBox sensor2NameBox;
+        private System.Windows.Forms.TextBox sensor3NameBox;
+        private System.Windows.Forms.TextBox sensor4NameBox;
+        private System.Windows.Forms.TextBox sensor5NameBox;
+        private System.Windows.Forms.TextBox sensor6NameBox;
+        private System.Windows.Forms.TextBox sensor7NameBox;
+        private System.Windows.Forms.TextBox sensor8NameBox;
     }
 }

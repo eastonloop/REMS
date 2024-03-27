@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,15 +14,29 @@ namespace Environment_Monitoring_System_Interface
 {
     public partial class SettingsPageForm : Form
     {
-        bool language = false;
-        bool scale = false;
+        public bool language = false;
+        public bool scale = false;
         double minValue;
         double maxValue;
-        double maxMax = 100;
-        double minMin = 32;
+        double maxMax = 85;
+        double minMin = 25;
+        
         int selectSens;
         bool tempHum = false;
-        bool file = false;
+        public bool file = false;
+        public int freq;
+        public string emailAddress;
+        public bool noAlert = true;
+
+        public Sensor sensor1 { get; set; }
+        public Sensor sensor2 { get; set; }
+        public Sensor sensor3 { get; set; }
+        public Sensor sensor4 { get; set; }
+        public Sensor sensor5 { get; set; }
+        public Sensor sensor6 { get; set; }
+        public Sensor sensor7 { get; set; }
+        public Sensor sensor8 { get; set; }
+
         public SettingsPageForm()
         {
             InitializeComponent();
@@ -28,47 +44,87 @@ namespace Environment_Monitoring_System_Interface
 
         private void languageBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (languageBox.Text == "Español")
+            if (languageBox.SelectedIndex == 1)
             {
                 language = true;
 
                 label1.Text = "Ajustes";
                 if (scaleBox.Text == "Temp Scale")
                     scaleBox.Text = "Escala de temperatura";
+                if (fileBox.Text == "File Type")
+                    fileBox.Text = "Tipo de Archivo";
                 label2.Text = "Límites";
                 tempButton.Text = "Temperatura";
-                humButton.Text = "humedad";
+                humButton.Text = "Humedad";
                 minLabel.Text = "Mínimo";
                 maxLabel.Text = "Máximo";
                 submitButton.Text = "Entregar";
-                emailLabel.Text = "Introduce tu correo electrónico";
+                emailLabel.Text = "Introduce tu correo electrónico:";
                 emailButton.Text = submitButton.Text;
-                frequencyLabel.Text = "¿Con qué frecuencia le gustaría recibir alertas por correo electrónico?";
+                frequencyLabel.Text = "¿Con qué frecuencia le gustaría \n recibir alertas por correo electrónico?";
                 if (frequencyBox.Text == "Select...")
-                    frequencyBox.Text = "seleccionar...";
+                    frequencyBox.Text = "Seleccionar...";
+            }
+            else
+            {
+                language = false;
+
+                label1.Text = "Settings";
+                if (scaleBox.Text == "Escala de temperatura")
+                    scaleBox.Text = "Temp Scale";
+                if (fileBox.Text == "Tipo de Archivo")
+                    fileBox.Text = "File Type";
+                label2.Text = "Thresholds";
+                tempButton.Text = "Temperature";
+                humButton.Text = "Humidity";
+                minLabel.Text = "Min";
+                maxLabel.Text = "Max";
+                submitButton.Text = "Submit";
+                emailLabel.Text = "Enter your Email:";
+                emailButton.Text = submitButton.Text;
+                frequencyLabel.Text = "How often would you like to \n receive email alerts?";
+                if (frequencyBox.Text == "Seleccionar...")
+                    frequencyBox.Text = "Select...";
             }
         }
 
         private void scaleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (scaleBox.Text == "Celsius")
+            if (scaleBox.SelectedIndex == 1)
             {
                 scale = true;
+                
+                minTypeLabel.Text = "°C";
+                maxTypeLabel.Text = "°C";
+            }
+            else
+            {
+                scale = false;
 
-                if (minTypeLabel.Text == "°F")
-                {
-                    minTypeLabel.Text = "°C";
-                    maxTypeLabel.Text = "°C";
-                }
+                minTypeLabel.Text = "°F";
+                maxTypeLabel.Text = "°F";
             }
         }
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if (scale)
+            if (tempHum)
             {
-                maxMax = 37.78;
-                minMin = 1.67;
+                maxMax = 70;
+                minMin = 30;
+            }
+            else
+            {
+                if (scale)
+                {
+                    maxMax = 29.44;
+                    minMin = -3.89;
+                }
+                else
+                {
+                    maxMax = 85;
+                    minMin = 25;
+                }
             }
 
             try
@@ -77,15 +133,68 @@ namespace Environment_Monitoring_System_Interface
                 maxValue = Convert.ToDouble(maxBox.Text);
 
                 if (maxValue <= minValue || maxValue > maxMax || minValue < minMin)
+                {
                     throw new Exception();
-
-
+                }
+                else
+                {
+                    switch (selectSens)
+                    {
+                        case 1:
+                            sensor1.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 2:
+                            sensor2.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 3:
+                            sensor3.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 4:
+                            sensor4.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 5:
+                            sensor5.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 6:
+                            sensor6.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 7:
+                            sensor7.setThresh(minValue, maxValue, tempHum);
+                            break;
+                        case 8:
+                            sensor8.setThresh(minValue, maxValue, tempHum);
+                            break;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 minBox.Text = string.Empty;
                 maxBox.Text = string.Empty;
-                MessageBox.Show("Invalid values. Please try again with values between 0 and 100.");
+                if (tempHum)
+                {
+                    if (language)
+                        MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre 0 y 100.");
+                    else
+                        MessageBox.Show("Invalid values. Please try again with values between 30 and 70.");
+                }
+                else
+                {
+                    if (scale)
+                    {
+                        if (language)
+                            MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre -3.5 y 29.");
+                        else
+                            MessageBox.Show("Invalid values. Please try again with values between -3.5 and 29.");
+                    }
+                    else
+                    {
+                        if (language)
+                            MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre 25 y 85.");
+                        else
+                            MessageBox.Show("Invalid values. Please try again with values between 25 and 85.");
+                    }
+                }
             }
         }
 
@@ -179,7 +288,43 @@ namespace Environment_Monitoring_System_Interface
         {
             if (fileBox.SelectedIndex == 1)
                 file = true;
+            else if (fileBox.SelectedIndex == 0)
+                file = false;
+        }
 
+        private void frequencyBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (frequencyBox.SelectedIndex)
+            {
+                case 0:
+                    freq = 2;
+                    if (!(emailAddress == null))
+                        noAlert = false;
+                    break;
+                case 1:
+                    freq = 4;
+                    if (!(emailAddress == null))
+                        noAlert = false;
+                    break;
+                case 2:
+                    freq = 6;
+                    if (!(emailAddress == null))
+                        noAlert = false;
+                    break;
+                case 3:
+                    freq = 12;
+                    if (!(emailAddress == null))
+                        noAlert = false;
+                    break;
+                default:
+                    noAlert = true;
+                    break;
+            }
+        }
+
+        private void emailButton_Click(object sender, EventArgs e)
+        {
+            emailAddress = textBox3.Text;
         }
     }
 }

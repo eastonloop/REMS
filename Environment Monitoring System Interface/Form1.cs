@@ -23,16 +23,11 @@ namespace Environment_Monitoring_System_Interface
 
     public partial class Form1 : Form
     {
-        string selectedCOMPort;
         private ManagementEventWatcher comPortWatcher;
 
-        bool ArduinoConnected;
         public bool isConnectedToCU = false;
         public string data;
         bool stop = false;
-
-        //start Eric storage of data coming in
-        List<String> sensorDataList;
 
         private async Task<string> ReadResponse()
         {
@@ -52,7 +47,6 @@ namespace Environment_Monitoring_System_Interface
         }
         private async void autoConnectCOMPort()
         {
-            isConnectedToCU = true;     //DON'T KEEP IT LIKE THIS
             string[] comPorts = GetCOMPorts();
 
             foreach (string port in comPorts)
@@ -75,32 +69,22 @@ namespace Environment_Monitoring_System_Interface
                 {
                     await Task.Run(() => serialPort1.Open());
                     serialPort1.Write("Z");
+            
                     var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
                     var responseTask = ReadResponse();
 
                     await Task.WhenAny(responseTask, timeoutTask);
 
-                    if (true/*responseTask.IsCompleted && responseTask.Result == "Connected"*/)
-                    {
-                        serialPort1.Open();
+                    serialPort1.Open();
+                    if(serialPort1.IsOpen) 
                         isConnectedToCU = true;
-                        textBox1.Text = "Connected";
-                        //if (stop)
-                        //    serialPort1.DataReceived += SerialPort1_DataReceived;
-                        return;
-                    }
+                    if (stop)
+                        serialPort1.DataReceived += SerialPort1_DataReceived;
+                    return;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Exception during COM port communication: {ex.Message}");
-                    textBox1.Text = "Not connected";
-                }
-                finally
-                {
-                    if (!isConnectedToCU)
-                    {
-                        serialPort1.Close();
-                    }
+                    welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
                 }
             }
         }
@@ -108,7 +92,6 @@ namespace Environment_Monitoring_System_Interface
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             data = serialPort1.ReadLine();
-
         }
 
         public Form1()
@@ -152,16 +135,6 @@ namespace Environment_Monitoring_System_Interface
             populateCOMPorts();
         }
 
-        public void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        public void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             comPortWatcher.Stop();
@@ -194,14 +167,17 @@ namespace Environment_Monitoring_System_Interface
 
                 stop = true;                
 
-              //  Task.Delay(500);
                 this.Hide();
 
-                form.ShowDialog();           
-                
-              //  Task.Delay(500);
-              //  this.Dispose();
+                form.ShowDialog();
+
+                this.Close();
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

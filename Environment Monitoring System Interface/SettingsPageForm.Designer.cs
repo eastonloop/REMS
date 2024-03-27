@@ -75,6 +75,9 @@
             // languageBox
             // 
             this.languageBox.FormattingEnabled = true;
+            this.languageBox.Items.AddRange(new object[] {
+            "English",
+            "Español"});
             this.languageBox.Location = new System.Drawing.Point(12, 100);
             this.languageBox.Name = "languageBox";
             this.languageBox.Size = new System.Drawing.Size(121, 28);
@@ -350,13 +353,13 @@
             "2 hrs",
             "4 hrs",
             "6 hrs",
-            "8 hrs",
             "12 hrs"});
             this.frequencyBox.Location = new System.Drawing.Point(134, 427);
             this.frequencyBox.Name = "frequencyBox";
             this.frequencyBox.Size = new System.Drawing.Size(141, 37);
             this.frequencyBox.TabIndex = 24;
             this.frequencyBox.Text = "Select...";
+            this.frequencyBox.SelectedIndexChanged += new System.EventHandler(this.frequencyBox_SelectedIndexChanged);
             // 
             // emailButton
             // 
@@ -368,6 +371,7 @@
             this.emailButton.TabIndex = 25;
             this.emailButton.Text = "Submit";
             this.emailButton.UseVisualStyleBackColor = false;
+            this.emailButton.Click += new System.EventHandler(this.emailButton_Click);
             // 
             // groupBox1
             // 

@@ -26,6 +26,7 @@ using System.Globalization;
 using System.IO.Packaging;
 using System.Media;
 using System.Windows.Media;
+using OfficeOpenXml.Drawing.Chart.Style;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -72,12 +73,15 @@ namespace Environment_Monitoring_System_Interface
         private List<double> batDay;
         public string path;
         public List<string> csvData;
+        private string timeText;
 
         public SerialPort SerialPort
         {
             get { return pigeon; }
             set { pigeon = value; }
         }
+
+        public List<Sensor> sensors = new List<Sensor>();
 
         Sensor sensor1 = new Sensor(1);
         Sensor sensor2 = new Sensor(2);
@@ -87,6 +91,8 @@ namespace Environment_Monitoring_System_Interface
         Sensor sensor6 = new Sensor(6);
         Sensor sensor7 = new Sensor(7);
         Sensor sensor8 = new Sensor(8);
+
+        
 
         public bool scale = false;
         public bool language = false;
@@ -102,6 +108,7 @@ namespace Environment_Monitoring_System_Interface
         int i = 0;
         private SoundPlayer soundPlayer;
 
+        
         private void doStuff()
         {
             pigeon.DataReceived += ListenUp;
@@ -139,22 +146,22 @@ namespace Environment_Monitoring_System_Interface
  
                     temp1Box.Invoke((MethodInvoker)delegate
                     {
-                        temp1Box.Text = Convert.ToString(sensor1.holdTemp);
+                        temp1Box.Text = Convert.ToString(Math.Round(sensor1.holdTemp));
                     });
 
                     hum1Box.Invoke((MethodInvoker)delegate
                     {
-                        hum1Box.Text = Convert.ToString(sensor1.holdHum);
+                        hum1Box.Text = Convert.ToString(Math.Round(sensor1.holdHum));
                     });
 
                     bat1Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor1.bat < 1.88 && language)
+                        if (sensor1.bat < 2.42 && sensor1.bat > 1 && language)
                         {
                             bat1Label.Text = "Batería baja";
                             bat1Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor1.bat < 1.88 && !language)
+                        else if (sensor1.bat < 2.42 && sensor1.bat > 1 && !language)
                         {
                             bat1Label.Text = "Low battery";
                             bat1Label.BackColor = System.Drawing.Color.Red;
@@ -166,11 +173,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
-
+                    sensor1Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
 
                     if (sensor1.esm == 1)
                         sensor1Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor1.esm == 0)
                         sensor1Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor1.checkTemp();
@@ -193,7 +201,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum1.Start();
                     }
 
-                    if (sensor1.bat < 1.88)
+                    if (sensor1.bat < 2.42 && sensor1.bat > 1)
                     {
                         if (whistleBat1 == null)
                         {
@@ -208,22 +216,22 @@ namespace Environment_Monitoring_System_Interface
 
                     temp2Box.Invoke((MethodInvoker)delegate
                     {
-                        temp2Box.Text = Convert.ToString(sensor2.holdTemp);
+                        temp2Box.Text = Convert.ToString(Math.Round(sensor2.holdTemp));
                     });
 
                     hum2Box.Invoke((MethodInvoker)delegate
                     {
-                        hum2Box.Text = Convert.ToString(sensor2.holdHum);
+                        hum2Box.Text = Convert.ToString(Math.Round(sensor2.holdHum));
                     });
 
                     bat2Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor2.bat < 1.88 && language)
+                        if (sensor2.bat < 2.42 && sensor2.bat > 1 && language)
                         {
                             bat2Label.Text = "Batería baja";
                             bat2Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor2.bat < 1.88 && !language)
+                        else if (sensor2.bat < 2.42 && sensor2.bat > 1 && !language)
                         {
                             bat2Label.Text = "Low battery";
                             bat2Label.BackColor = System.Drawing.Color.Red;
@@ -235,10 +243,21 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
-                    if (sensor2.esm == 1)
-                        sensor2Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
-                        sensor2Label.BackColor = System.Drawing.Color.Gold;
+                    /*      if (sensor2.esm == 1)
+                              sensor2Label.BackColor = System.Drawing.Color.CornflowerBlue;
+                          else if (sensor2.esm == 0)
+                              sensor2Label.BackColor = System.Drawing.Color.Gold;
+                    */
+                    sensor2Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
+                    sensor2Label.Invoke((MethodInvoker)delegate
+                    {
+                        if (sensor2.esm == 1)
+                            sensor2Label.BackColor = System.Drawing.Color.CornflowerBlue;
+                        else if (sensor2.esm == 0)
+                            sensor2Label.BackColor = System.Drawing.Color.Gold;
+                    });
 
                     sensor2.checkTemp();
 
@@ -260,7 +279,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum2.Start();
                     }
 
-                    if (sensor2.bat < 1.88)
+                    if (sensor2.bat < 2.42 && sensor2.bat > 1)
                     {
                         if (whistleBat2 == null)
                         {
@@ -275,22 +294,22 @@ namespace Environment_Monitoring_System_Interface
 
                     temp3Box.Invoke((MethodInvoker)delegate
                     {
-                        temp3Box.Text = Convert.ToString(sensor3.holdTemp);
+                        temp3Box.Text = Convert.ToString(Math.Round(sensor3.holdTemp));
                     });
 
                     hum3Box.Invoke((MethodInvoker)delegate
                     {
-                        hum3Box.Text = Convert.ToString(sensor3.holdHum);
+                        hum3Box.Text = Convert.ToString(Math.Round(sensor3.holdHum));
                     });
 
                     bat3Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor3.bat < 1.88 && language)
+                        if (sensor3.bat < 2.42 && sensor3.bat > 1 && language)
                         {
                             bat3Label.Text = "Batería baja";
                             bat3Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor3.bat < 1.88 && !language)
+                        else if (sensor3.bat < 2.42 && sensor3.bat > 1 && !language)
                         {
                             bat3Label.Text = "Low battery";
                             bat3Label.BackColor = System.Drawing.Color.Red;
@@ -302,9 +321,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor3Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor3.esm == 1)
                         sensor3Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor3.esm == 0)
                         sensor3Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor3.checkTemp();
@@ -327,7 +349,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum3.Start();
                     }
 
-                    if (sensor3.bat < 1.88)
+                    if (sensor3.bat < 2.42 && sensor3.bat > 1)
                     {
                         if (whistleBat3 == null)
                         {
@@ -342,22 +364,22 @@ namespace Environment_Monitoring_System_Interface
                     
                     temp4Box.Invoke((MethodInvoker)delegate
                     {
-                        temp4Box.Text = Convert.ToString(sensor4.holdTemp);
+                        temp4Box.Text = Convert.ToString(Math.Round(sensor4.holdTemp));
                     });
 
                     hum4Box.Invoke((MethodInvoker)delegate
                     {
-                        hum4Box.Text = Convert.ToString(sensor4.holdHum);
+                        hum4Box.Text = Convert.ToString(Math.Round(sensor4.holdHum));
                     });
 
                     bat4Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor4.bat < 1.88 && language)
+                        if (sensor4.bat < 2.42 && sensor4.bat > 1 && language)
                         {
                             bat4Label.Text = "Batería baja";
                             bat4Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor4.bat < 1.88 && !language)
+                        else if (sensor4.bat < 2.42 && sensor4.bat > 1 && !language)
                         {
                             bat4Label.Text = "Low battery";
                             bat4Label.BackColor = System.Drawing.Color.Red;
@@ -369,9 +391,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor4Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor4.esm == 1)
                         sensor4Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor4.esm == 0)
                         sensor4Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor4.checkTemp();
@@ -394,7 +419,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum4.Start();
                     }
 
-                    if (sensor4.bat < 1.88)
+                    if (sensor4.bat < 2.42 && sensor4.bat > 1)
                     {
                         if (whistleBat4 == null)
                         {
@@ -409,22 +434,22 @@ namespace Environment_Monitoring_System_Interface
                     
                     temp5Box.Invoke((MethodInvoker)delegate
                     {
-                        temp5Box.Text = Convert.ToString(sensor5.holdTemp);
+                        temp5Box.Text = Convert.ToString(Math.Round(sensor5.holdTemp));
                     });
 
                     hum5Box.Invoke((MethodInvoker)delegate
                     {
-                        hum5Box.Text = Convert.ToString(sensor5.holdHum);
+                        hum5Box.Text = Convert.ToString(Math.Round(sensor5.holdHum));
                     });
 
                     bat5Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor5.bat < 1.88 && language)
+                        if (sensor5.bat < 2.42 && sensor5.bat > 1 && language)
                         {
                             bat5Label.Text = "Batería baja";
                             bat5Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor5.bat < 1.88 && !language)
+                        else if (sensor5.bat < 2.42 && sensor5.bat > 1 && !language)
                         {
                             bat5Label.Text = "Low battery";
                             bat5Label.BackColor = System.Drawing.Color.Red;
@@ -436,9 +461,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor5Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor5.esm == 1)
                         sensor5Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor5.esm == 0)
                         sensor5Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor5.checkTemp();
@@ -461,7 +489,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum5.Start();
                     }
 
-                    if (sensor5.bat < 1.88)
+                    if (sensor5.bat < 2.42 && sensor5.bat > 1)
                     {
                         if (whistleBat5 == null)
                         {
@@ -476,22 +504,22 @@ namespace Environment_Monitoring_System_Interface
                     
                     temp6Box.Invoke((MethodInvoker)delegate
                     {
-                        temp6Box.Text = Convert.ToString(sensor6.holdTemp);
+                        temp6Box.Text = Convert.ToString(Math.Round(sensor6.holdTemp));
                     });
 
                     hum6Box.Invoke((MethodInvoker)delegate
                     {
-                        hum6Box.Text = Convert.ToString(sensor6.holdHum);
+                        hum6Box.Text = Convert.ToString(Math.Round(sensor6.holdHum));
                     });
 
                     bat6Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor6.bat < 1.88 && language)
+                        if (sensor6.bat < 2.42 && sensor6.bat > 1 && language)
                         {
                             bat6Label.Text = "Batería baja";
                             bat6Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor6.bat < 1.88 && !language)
+                        else if (sensor6.bat < 2.42 && sensor6.bat > 1 && !language)
                         {
                             bat6Label.Text = "Low battery";
                             bat6Label.BackColor = System.Drawing.Color.Red;
@@ -503,9 +531,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor6Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor6.esm == 1)
                         sensor6Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor6.esm == 0)
                         sensor6Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor6.checkTemp();
@@ -528,7 +559,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum6.Start();
                     }
 
-                    if (sensor6.bat < 1.88)
+                    if (sensor6.bat < 2.42 && sensor6.bat > 1)
                     {
                         if (whistleBat6 == null)
                         {
@@ -543,22 +574,22 @@ namespace Environment_Monitoring_System_Interface
                     
                     temp7Box.Invoke((MethodInvoker)delegate
                     {
-                        temp7Box.Text = Convert.ToString(sensor7.holdTemp);
+                        temp7Box.Text = Convert.ToString(Math.Round(sensor7.holdTemp));
                     });
 
                     hum7Box.Invoke((MethodInvoker)delegate
                     {
-                        hum7Box.Text = Convert.ToString(sensor7.holdHum);
+                        hum7Box.Text = Convert.ToString(Math.Round(sensor7.holdHum));
                     });
 
                     bat7Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor7.bat < 1.88 && language)
+                        if (sensor7.bat < 2.42 && sensor7.bat > 1 && language)
                         {
                             bat7Label.Text = "Batería baja";
                             bat7Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor7.bat < 1.88 && !language)
+                        else if (sensor7.bat < 2.42 && sensor7.bat > 1 && !language)
                         {
                             bat7Label.Text = "Low battery";
                             bat7Label.BackColor = System.Drawing.Color.Red;
@@ -570,9 +601,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor7Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor7.esm == 1)
                         sensor7Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor7.esm == 0)
                         sensor7Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor7.checkTemp();
@@ -595,7 +629,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum7.Start();
                     }
 
-                    if (sensor7.bat < 1.88)
+                    if (sensor7.bat < 2.42 && sensor7.bat > 1)
                     {
                         if (whistleBat7 == null)
                         {
@@ -610,22 +644,22 @@ namespace Environment_Monitoring_System_Interface
                     
                     temp8Box.Invoke((MethodInvoker)delegate
                     {
-                        temp8Box.Text = Convert.ToString(sensor8.holdTemp);
+                        temp8Box.Text = Convert.ToString(Math.Round(sensor8.holdTemp));
                     });
 
                     hum8Box.Invoke((MethodInvoker)delegate
                     {
-                        hum8Box.Text = Convert.ToString(sensor8.holdHum);
+                        hum8Box.Text = Convert.ToString(Math.Round(sensor8.holdHum));
                     });
 
                     bat8Label.Invoke((MethodInvoker)delegate
                     {
-                        if (sensor8.bat < 1.88 && language)
+                        if (sensor8.bat < 2.42 && sensor8.bat > 1 && language)
                         {
                             bat8Label.Text = "Batería baja";
                             bat8Label.BackColor = System.Drawing.Color.Red;
                         }
-                        else if (sensor8.bat < 1.88 && !language)
+                        else if (sensor8.bat < 2.42 && sensor8.bat > 1 && !language)
                         {
                             bat8Label.Text = "Low battery";
                             bat8Label.BackColor = System.Drawing.Color.Red;
@@ -637,9 +671,12 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
+                    sensor8Label.BackColor = sensorFeedLabel.BackColor;
+                    Thread.Sleep(500);
+
                     if (sensor8.esm == 1)
                         sensor8Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                    else
+                    else if (sensor8.esm == 0)
                         sensor8Label.BackColor = System.Drawing.Color.Gold;
 
                     sensor8.checkTemp();
@@ -662,7 +699,7 @@ namespace Environment_Monitoring_System_Interface
                         whistleHum8.Start();
                     }
 
-                    if (sensor8.bat < 1.88)
+                    if (sensor8.bat < 2.42 && sensor8.bat > 1)
                     {
                         if (whistleBat8 == null)
                         {
@@ -687,12 +724,14 @@ namespace Environment_Monitoring_System_Interface
             humDay = new List<double>();
             batDay = new List<double>();
 
-            for (int i = 0; i < 8; i++)
-            {
-                tempDay.Add(0);
-                humDay.Add(0);
-                batDay.Add(0);
-            }
+            sensors.Add(sensor1);
+            sensors.Add(sensor2);
+            sensors.Add(sensor3);
+            sensors.Add(sensor4);
+            sensors.Add(sensor5);
+            sensors.Add(sensor6);
+            sensors.Add(sensor7);
+            sensors.Add(sensor8);
         }
 
         private void HomePageForm_Load(object sender, EventArgs e)
@@ -745,7 +784,7 @@ namespace Environment_Monitoring_System_Interface
             paperBoy.Start();
             while (!(this.IsDisposed))
             {
-                Thread.Sleep(1000 * 60 * 5);
+                Thread.Sleep(1000 * 25);
                 sensor1.takeAvg();
                 sensor2.takeAvg();
                 sensor3.takeAvg();
@@ -761,7 +800,15 @@ namespace Environment_Monitoring_System_Interface
         {
             while (!(this.IsDisposed))
             {
-                Thread.Sleep(1000 * 60 * 60);
+                Thread.Sleep(1000 * 60 * 10);
+
+                for (int i = 0; i < 8; i++)
+                {
+                    tempDay.Add(0);
+                    humDay.Add(0);
+                    batDay.Add(0);
+                }
+
                 tempDay[0] = Math.Round(100 * sensor1.dailyTempAvg()) / 100;
                 tempDay[1] = Math.Round(100 * sensor2.dailyTempAvg()) / 100;
                 tempDay[2] = Math.Round(100 * sensor3.dailyTempAvg()) / 100;
@@ -793,6 +840,10 @@ namespace Environment_Monitoring_System_Interface
                     excelOut();
                 else
                     csvOut();
+               
+                tempDay.Clear();
+                humDay.Clear();
+                batDay.Clear();
             }
         }
 
@@ -840,7 +891,7 @@ namespace Environment_Monitoring_System_Interface
         public void excelOut()
         {
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-
+            
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet report;
@@ -859,33 +910,52 @@ namespace Environment_Monitoring_System_Interface
 
                 report.Cells[1, 1].Value = theDate;
 
-                if (language)
+                for (int i = 0; i < 8; i++)
                 {
-                    report.Name = "REMS Reporte Diario- " + theDate;
-                    report.Cells[2, 3].Value = "Temperatura Media";
-                    report.Cells[2, 4].Value = "Humedad Promedio";
-                    report.Cells[2, 5].Value = "Último Nivel de Batería";
-                    batText = " Voltios";
-                }
-                else
-                {
-                    report.Name = "REMS Daily Report- " + theDate;
-                    report.Cells[2, 3].Value = "Average Temperature";
-                    report.Cells[2, 4].Value = "Average Humidity";
-                    report.Cells[2, 5].Value = "Latest Battery Level";
-                    batText = " Volts";
+                    report.Cells[2, i * 3 + 3].Value = "Sensor " + (i + 1);
+
+                    if (language)
+                    {
+                        report.Name = "REMS Reporte Diario- " + theDate;
+                        report.Cells[3, i * 3 + 2].Value = "Temperatura Media";
+                        report.Cells[3, i * 3 + 3].Value = "Humedad Promedio";
+                        report.Cells[3, i * 3 + 4].Value = "Último Nivel de Batería";
+                        batText = " Voltios";
+                        report.Cells[30, 1].Value = "Acumulativo";
+                    }
+                    else
+                    {
+                        report.Name = "REMS Daily Report- " + theDate;
+                        report.Cells[3, i * 3 + 2].Value = "Average Temperature";
+                        report.Cells[3, i * 3 + 3].Value = "Average Humidity";
+                        report.Cells[3, i * 3 + 4].Value = "Latest Battery Level";
+                        batText = " Volts";
+                        report.Cells[30, 1].Value = "Cumulative";
+                    }
                 }
 
-                for (int i = 3; i < 11; i++)
+                for (int i = 1; i < 9; i++)
                 {
-                    report.Cells[i, 2].Value = "Sensor " + (i - 2);
-                }
+                    Sensor americanPeople = sensors[i - 1];
 
-                for (int i = 3; i < 11; i++)
-                {
-                    report.Cells[i, 3].Value = tempDay[i - 3] + tempType;
-                    report.Cells[i, 4].Value = humDay[i - 3] + " %";
-                    report.Cells[i, 5].Value = batDay[i - 3] + batText;
+                    report.Cells[2, i * 3 - 1].Value = "CPU: " + americanPeople.sendCount;
+                    report.Cells[2, i * 3 + 1].Value = "GUI: " + americanPeople.catchCount;
+
+                    for (int j = 4; j < 28; j++)
+                    {
+                        report.Cells[j, i * 3 - 1].Value = americanPeople.tempAvg[j - 4] + tempType;
+                        report.Cells[j, i * 3].Value = americanPeople.humAvg[j - 4] + " %";
+                        report.Cells[j, i * 3 + 1].Value = americanPeople.lastBat[j - 4] + batText;
+                    }
+
+                    report.Cells[30, i * 3 - 1].Value = tempDay[i - 1] + tempType;
+                    report.Cells[30, i * 3].Value = humDay[i - 1] + " %";
+                    report.Cells[30, i * 3 + 1].Value = batDay[i - 1] + batText;
+
+                    americanPeople.tempAvg.Clear();
+                    americanPeople.humAvg.Clear();
+                    americanPeople.lastBat.Clear();
+                    americanPeople.catchCount = 0;
                 }
 
                 if (language)
@@ -911,11 +981,13 @@ namespace Environment_Monitoring_System_Interface
             {
                 path = "Reporte Diario.csv";
                 batText = " Voltios";
+                timeText = "Hora ";
             }
             else
             {
                 path = "Daily Report.csv";
                 batText = " Volts";
+                timeText = "Hour ";
             }
 
             path = System.IO.Path.Combine(Environment.CurrentDirectory, path);
@@ -934,19 +1006,69 @@ namespace Environment_Monitoring_System_Interface
             {
                 writer.WriteLine(DateTime.Now.ToString());
                 writer.WriteLine('\n');
+
                 if (language)
                 {
-                    writer.WriteLine("Nombre del Sensor, Temperatura, Humedad, Nivel de Bateria");
+                    writer.Write("Tiempo,");
                 }
                 else
-                    writer.WriteLine("Sensor Name, Temperature, Humidity, Battery Level");
-
-                writer.WriteLine('\n');
+                {
+                    writer.Write("Time,");
+                }
 
                 for (int i = 0; i < sensors.Count; i++)
                 {
-                    writer.WriteLine(sensors[i].name + "," + tempDay[i] + tempType + "," + humDay[i] 
-                        + " %" + "," + sensors[i].bat + batText);
+                    for (int j = 0; j < 3; j++)
+                    {
+                        writer.Write(sensors[i].name + ",");
+                    }
+                }
+
+                writer.Write('\n');
+
+                for (int i = 0; i < sensors.Count; i++)
+                {
+                    if (language)
+                    {
+                        writer.WriteLine("Tiempo, Temperatura, Humedad, Nivel de Bateria" + ",");
+                    }
+                    else
+                        writer.WriteLine("Time, Temperature, Humidity, Battery Level" + ",");
+                }
+
+                writer.WriteLine('\n');
+
+                for (int i = 0; i < sensors[0].tempAvg.Count; i++)
+                {
+                    writer.Write(timeText + (i + 1).ToString() + ",");
+
+                    for (int j = 0; j < sensors.Count; j++)
+                    {
+                        writer.Write(sensors[j].tempAvg[i] + tempType + "," + sensors[j].humAvg[i]
+                        + " %" + "," + sensors[j].lastBat[i] + batText + ",");
+                    }
+
+                    writer.WriteLine("\n");
+                }
+
+                if (language)
+                {
+                    writer.Write("Acumulativo" + ",");
+                }
+                else
+                {
+                    writer.Write("Cumulative" + ",");
+                }
+
+                for (int i = 0; i < sensors.Count; i++)
+                {
+                    writer.Write(sensors[i].name + "," + tempDay[i] + tempType + "," + humDay[i] 
+                        + " %" + "," + sensors[i].bat + batText + ",");
+                    
+                    sensors[i].tempAvg.Clear();
+                    sensors[i].humAvg.Clear();
+                    sensors[i].lastBat.Clear();
+                    sensors[i].catchCount = 0;
                 }
             }
 
@@ -1113,10 +1235,10 @@ namespace Environment_Monitoring_System_Interface
         {
             if (!noAlert)
             {
-                while (culprit.bat < 1.88)
+                while (culprit.bat < 2.42 && culprit.bat > 1 && !(emailAddress == null))
                 {
                     MailMan.SendBat(emailAddress, language, culprit);
-                    Thread.Sleep(1000 * 60 * freq);
+                    Thread.Sleep(1000 * 60 * 60 * freq);
                 }
             }
 

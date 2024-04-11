@@ -24,8 +24,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <MinimumRequiredVersion>1.0.0.4</MinimumRequiredVersion>
-    <ApplicationRevision>5</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.27</MinimumRequiredVersion>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -76,7 +76,8 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Environment Monitoring System Interface_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsvHelper, Version=31.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
@@ -196,10 +197,7 @@
     <EmbeddedResource Include="SettingsPageForm.resx">
       <DependentUpon>SettingsPageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Environment Monitoring System Interface_1_TemporaryKey.pfx" />
-    <None Include="Environment Monitoring System Interface_2_TemporaryKey.pfx" />
     <None Include="Environment Monitoring System Interface_3_TemporaryKey.pfx" />
-    <None Include="Environment Monitoring System Interface_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

@@ -20,6 +20,7 @@ namespace Environment_Monitoring_System_Interface
         public double maxHum = 100;
         public List<double> tempAvg;
         public List<double> humAvg;
+        public List<double> lastBat;
         public double dayTemp;
         public double dayHum;
         public int num;
@@ -31,6 +32,8 @@ namespace Environment_Monitoring_System_Interface
         public bool breachHum = false;
         public bool standbyTemp = true;
         public bool standbyHum = true;
+        public int sendCount = 0;
+        public int catchCount = 0;
         
         public Sensor(int i)
         {
@@ -41,6 +44,7 @@ namespace Environment_Monitoring_System_Interface
             hums = new List<double>();
             tempAvg = new List<double>();
             humAvg = new List<double>();
+            lastBat = new List<double>();
         }
 
         public void addData(string[] transmitData, bool scale)
@@ -49,6 +53,7 @@ namespace Environment_Monitoring_System_Interface
             holdHum = Convert.ToDouble(transmitData[2]) / 100;
             bat = Convert.ToDouble(transmitData[3]) / 100;
             esm = Convert.ToInt16(transmitData[4]);
+            sendCount = Convert.ToInt16(transmitData[5]);
             tempScale = scale;
 
             if (scale)
@@ -58,6 +63,7 @@ namespace Environment_Monitoring_System_Interface
 
             temps.Add(holdTemp);
             hums.Add(holdHum);
+            catchCount++;
         }
 
         public void setThresh(double min, double max, bool which)
@@ -78,8 +84,24 @@ namespace Environment_Monitoring_System_Interface
 
         public void takeAvg()
         {
-            tempAvg.Add(temps.Average(x => x));
-            humAvg.Add(hums.Average(x => x));
+            if (temps.Count == 0)
+            {
+                temps.Add(0);
+            }
+
+            if (hums.Count == 0)
+            {
+                hums.Add(0);
+            }
+
+            if (bat == 0.0)
+            {
+                bat = 0;
+            }
+
+            tempAvg.Add(Math.Round(100 * temps.Average(x => x)) / 100);
+            humAvg.Add(Math.Round(100 * hums.Average(x => x)) / 100);
+            lastBat.Add(Math.Round(100 * bat) / 100);
 
             temps.Clear();
             hums.Clear();
@@ -87,18 +109,24 @@ namespace Environment_Monitoring_System_Interface
 
         public double dailyTempAvg()
         {
-            dayTemp = tempAvg.Average(x => x);
+            if (tempAvg.Count == 0)
+            {
+                tempAvg[0] = 0;
+            }
 
-            tempAvg.Clear();
+            dayTemp = tempAvg.Average(x => x);
 
             return dayTemp;
         }
 
         public double dailyHumAvg()
         {
-            dayHum = humAvg.Average(x => x);
+            if (humAvg.Count == 0)
+            {
+                humAvg[0] = 0;
+            }
 
-            humAvg.Clear();
+            dayHum = humAvg.Average(x => x);
 
             return dayHum;
         }

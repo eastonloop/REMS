@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Forms;
-using OfficeOpenXml.Drawing.Chart;
-using OfficeOpenXml;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -113,7 +107,7 @@ namespace Environment_Monitoring_System_Interface
                 inequality = "lower than ";
                 bound = "minimum of " + minMag;
             }
-            
+
             SmtpClient smtpClient = new SmtpClient("smtp.outlook.com")
             {
                 Port = 587,

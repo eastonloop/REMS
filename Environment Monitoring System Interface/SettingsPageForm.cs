@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Environment_Monitoring_System_Interface
@@ -20,7 +11,7 @@ namespace Environment_Monitoring_System_Interface
         double maxValue;
         double maxMax = 85;
         double minMin = 25;
-        
+
         int selectSens;
         bool tempHum = false;
         public bool file = false;
@@ -93,7 +84,7 @@ namespace Environment_Monitoring_System_Interface
             if (scaleBox.SelectedIndex == 1)
             {
                 scale = true;
-                
+
                 minTypeLabel.Text = "°C";
                 maxTypeLabel.Text = "°C";
             }

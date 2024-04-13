@@ -1,22 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Management;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Management;
-using System.Collections;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using System.Reflection.Emit;
-using OfficeOpenXml;
-using DocumentFormat.OpenXml.Vml;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -49,48 +36,49 @@ namespace Environment_Monitoring_System_Interface
         {
             string[] comPorts = GetCOMPorts();
 
-          //  foreach (string port in comPorts)
-          //  for (int i = 1; i <= 20; i++)
-          //  {
+            //  foreach (string port in comPorts)
+            //  for (int i = 1; i <= 20; i++)
+            //  {
+            if (serialPort1.IsOpen)
+            {
+                return;
+            }
+
+
+
+            //  serialPort1.PortName = port;
+            serialPort1.PortName = "COM6";
+            serialPort1.BaudRate = 9600;
+            serialPort1.DtrEnable = true;
+            serialPort1.DataBits = 8;
+            serialPort1.Parity = Parity.None;
+            serialPort1.StopBits = StopBits.One;
+            serialPort1.Handshake = Handshake.None;
+            serialPort1.Encoding = System.Text.Encoding.Default;
+
+            try
+            {
+                await Task.Run(() => serialPort1.Open());
+                serialPort1.Write("Z");
+
+                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
+                var responseTask = ReadResponse();
+
+                await Task.WhenAny(responseTask, timeoutTask);
+
+                serialPort1.Open();
                 if (serialPort1.IsOpen)
-                {
-                    return;
-                }
-
-                
-
-                //  serialPort1.PortName = port;
-                serialPort1.PortName = "COM6";
-                serialPort1.BaudRate = 9600;
-                serialPort1.DtrEnable = true;
-                serialPort1.DataBits = 8;
-                serialPort1.Parity = Parity.None;
-                serialPort1.StopBits = StopBits.One;
-                serialPort1.Handshake = Handshake.None;
-                serialPort1.Encoding = System.Text.Encoding.Default;
-
-                try
-                {
-                    await Task.Run(() => serialPort1.Open());
-                    serialPort1.Write("Z");
-            
-                    var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
-                    var responseTask = ReadResponse();
-
-                    await Task.WhenAny(responseTask, timeoutTask);
-
-                    serialPort1.Open();
-                    if(serialPort1.IsOpen) 
-                        isConnectedToCU = true;
-                    if (stop)
-                        serialPort1.DataReceived += SerialPort1_DataReceived;
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
-                }
-         //   }
+                    isConnectedToCU = true;
+                    welcomeMessageBox.Text = "Connected";
+                if (stop)
+                    serialPort1.DataReceived += SerialPort1_DataReceived;
+                return;
+            }
+            catch (Exception ex)
+            {
+                welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
+            }
+            //   }
         }
 
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -159,24 +147,24 @@ namespace Environment_Monitoring_System_Interface
             }
 
         }
-     
+
         private void continueButton_Click_1(object sender, EventArgs e)
         {
-          //  if (isConnectedToCU)
-         //   {
-                HomePageForm form = new HomePageForm
-                {
-                    SerialPort = serialPort1
-                };
+            //  if (isConnectedToCU)
+            //   {
+            HomePageForm form = new HomePageForm
+            {
+                SerialPort = serialPort1
+            };
 
-                stop = true;                
+            stop = true;
 
-                this.Hide();
+            this.Hide();
 
-                form.ShowDialog();
+            form.ShowDialog();
 
-                this.Close();
-       //     }
+            this.Close();
+            //     }
         }
 
         private void Form1_Load(object sender, EventArgs e)

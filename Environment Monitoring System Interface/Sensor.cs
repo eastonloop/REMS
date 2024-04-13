@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -34,7 +32,7 @@ namespace Environment_Monitoring_System_Interface
         public bool standbyHum = true;
         public int sendCount = 0;
         public int catchCount = 0;
-        
+
         public Sensor(int i)
         {
             num = i;
@@ -68,13 +66,13 @@ namespace Environment_Monitoring_System_Interface
 
         public void setThresh(double min, double max, bool which)
         {
-           if (which)
+            if (which)
             {
                 minHum = min;
                 maxHum = max;
                 standbyHum = false;
             }
-           else
+            else
             {
                 minTemp = min;
                 maxTemp = max;

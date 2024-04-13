@@ -14,19 +14,20 @@ namespace Environment_Monitoring_System_Interface
 {
     public partial class SettingsPageForm : Form
     {
-        public bool language = false;
-        public bool scale = false;
+        //public bool language = false;
+        //public bool scale = false;
         double minValue;
         double maxValue;
         double maxMax = 85;
         double minMin = 25;
         
-        int selectSens;
+        int selectSens = 10;
         bool tempHum = false;
-        public bool file = false;
-        public int freq;
-        public string emailAddress;
-        public bool noAlert = true;
+        //file = false;
+        //public int freq;
+        //public string emailAddress;
+        //public bool noAlert = true;
+        public bool waitToSet;
 
         public Sensor sensor1 { get; set; }
         public Sensor sensor2 { get; set; }
@@ -37,16 +38,32 @@ namespace Environment_Monitoring_System_Interface
         public Sensor sensor7 { get; set; }
         public Sensor sensor8 { get; set; }
 
-        public SettingsPageForm()
+        private HomePageForm form;
+
+        //public string emailAddress { get; set; }
+ 
+        public SettingsPageForm(HomePageForm HomePageForm)
         {
             InitializeComponent();
+            form = HomePageForm;
+            textBox3.Text = form.EmailAddress;
+            if (form.fileType)
+            {
+                fileBox.SelectedIndex = 1;
+            }
+            else
+            {
+                fileBox.SelectedIndex = 0;
+
+            }
+
         }
 
         private void languageBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (languageBox.SelectedIndex == 1)
             {
-                language = true;
+                form.languageType = true;
 
                 label1.Text = "Ajustes";
                 if (scaleBox.Text == "Temp Scale")
@@ -67,7 +84,7 @@ namespace Environment_Monitoring_System_Interface
             }
             else
             {
-                language = false;
+                form.languageType = false;
 
                 label1.Text = "Settings";
                 if (scaleBox.Text == "Escala de temperatura")
@@ -92,14 +109,14 @@ namespace Environment_Monitoring_System_Interface
         {
             if (scaleBox.SelectedIndex == 1)
             {
-                scale = true;
+                form.scaleType = true;
                 
                 minTypeLabel.Text = "°C";
                 maxTypeLabel.Text = "°C";
             }
             else
             {
-                scale = false;
+                form.scaleType = false;
 
                 minTypeLabel.Text = "°F";
                 maxTypeLabel.Text = "°F";
@@ -115,7 +132,7 @@ namespace Environment_Monitoring_System_Interface
             }
             else
             {
-                if (scale)
+                if (form.scaleType)
                 {
                     maxMax = 29.44;
                     minMin = -3.89;
@@ -173,23 +190,23 @@ namespace Environment_Monitoring_System_Interface
                 maxBox.Text = string.Empty;
                 if (tempHum)
                 {
-                    if (language)
+                    if (form.languageType)
                         MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre 0 y 100.");
                     else
                         MessageBox.Show("Invalid values. Please try again with values between 30 and 70.");
                 }
                 else
                 {
-                    if (scale)
+                    if (form.scaleType)
                     {
-                        if (language)
+                        if (form.languageType)
                             MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre -3.5 y 29.");
                         else
                             MessageBox.Show("Invalid values. Please try again with values between -3.5 and 29.");
                     }
                     else
                     {
-                        if (language)
+                        if (form.languageType)
                             MessageBox.Show("Valores no válidos. Inténtelo de nuevo con valores entre 25 y 85.");
                         else
                             MessageBox.Show("Invalid values. Please try again with values between 25 and 85.");
@@ -201,67 +218,88 @@ namespace Environment_Monitoring_System_Interface
         private void sensor1Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 1;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+           // maxBox.Text = string.Empty;
+            getTempThresh(sensor1, tempHum);
         }
 
         private void sensor2Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 2;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor2, tempHum);
         }
 
         private void sensor3Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 3;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor3, tempHum);
         }
 
         private void sensor4Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 4;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor4, tempHum);
         }
 
         private void sensor5Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 5;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor5, tempHum);
         }
 
         private void sensor6Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 6;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor6, tempHum);
         }
 
         private void sensor7Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 7;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor7, tempHum);
         }
 
         private void sensor8Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 8;
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //minBox.Text = string.Empty;
+            //maxBox.Text = string.Empty;
+            getTempThresh(sensor8, tempHum);
         }
 
         private void tempButton_CheckedChanged(object sender, EventArgs e)
         {
             tempHum = false;
 
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //if no sensor selected, display blank, else grab whatever is stored in each sensor
+     
+                switch (selectSens)
+                {
+                    case 1: getTempThresh(sensor1, tempHum); break;
+                    case 2: getTempThresh(sensor2, tempHum); break;
+                    case 3: getTempThresh(sensor3, tempHum); break;
+                    case 4: getTempThresh(sensor4, tempHum); break;
+                    case 5: getTempThresh(sensor5, tempHum); break;
+                    case 6: getTempThresh(sensor6, tempHum); break;
+                    case 7: getTempThresh(sensor7, tempHum); break;
+                    case 8: getTempThresh(sensor8, tempHum); break;
+                    default: break;
+                }
+    
 
-            if (scale)
+            if (form.scaleType)
             {
                 minTypeLabel.Text = "°C";
                 maxTypeLabel.Text = "°C";
@@ -277,8 +315,21 @@ namespace Environment_Monitoring_System_Interface
         {
             tempHum = true;
 
-            minBox.Text = string.Empty;
-            maxBox.Text = string.Empty;
+            //if no sensor selected, display blank, else grab values from each sensor 
+
+            switch(selectSens)
+            {
+                case 1: getTempThresh(sensor1,tempHum); break;
+                case 2: getTempThresh(sensor2,tempHum); break;
+                case 3: getTempThresh(sensor3,tempHum); break;
+                case 4: getTempThresh(sensor4,tempHum); break;
+                case 5: getTempThresh(sensor5,tempHum); break;
+                case 6: getTempThresh(sensor6,tempHum); break;
+                case 7: getTempThresh(sensor7,tempHum); break;
+                case 8: getTempThresh(sensor8,tempHum); break;
+                default: break;
+            }
+            
 
             minTypeLabel.Text = "%";
             maxTypeLabel.Text = "%";
@@ -287,9 +338,9 @@ namespace Environment_Monitoring_System_Interface
         private void fileBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (fileBox.SelectedIndex == 1)
-                file = true;
+                form.fileType = true;
             else if (fileBox.SelectedIndex == 0)
-                file = false;
+                form.fileType = false;
         }
 
         private void frequencyBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,34 +348,78 @@ namespace Environment_Monitoring_System_Interface
             switch (frequencyBox.SelectedIndex)
             {
                 case 0:
-                    freq = 2;
-                    if (!(emailAddress == null))
-                        noAlert = false;
+                    form.freqType = 2;
+                    if (!(form.EmailAddress == null))
+                        form.noAlertType = false;
                     break;
                 case 1:
-                    freq = 4;
-                    if (!(emailAddress == null))
-                        noAlert = false;
+                    form.freqType = 4;
+                    if (!(form.EmailAddress == null))
+                        form.noAlertType = false;
                     break;
                 case 2:
-                    freq = 6;
-                    if (!(emailAddress == null))
-                        noAlert = false;
+                    form.freqType = 6;
+                    if (!(form.EmailAddress == null))
+                        form.noAlertType = false;
                     break;
                 case 3:
-                    freq = 12;
-                    if (!(emailAddress == null))
-                        noAlert = false;
+                    form.freqType = 12;
+                    if (!(form.EmailAddress == null))
+                        form.noAlertType = false;
                     break;
                 default:
-                    noAlert = true;
+                    form.noAlertType = true;
                     break;
             }
         }
 
         private void emailButton_Click(object sender, EventArgs e)
         {
-            emailAddress = textBox3.Text;
+            form.EmailAddress = textBox3.Text;
+        }
+
+        private void settingsPageForm_Closing(object sender, FormClosedEventArgs e)
+        {
+            waitToSet = false;
+
+            this.Visible = false;
+          
+        }
+        private void getTempThresh(Sensor sensor, bool tempHum )
+        {
+            if((sensor.minTemp != -5) && !tempHum)
+            {
+                minBox.Text = Convert.ToString(sensor.minTemp);
+                maxBox.Text = Convert.ToString(sensor.maxTemp);
+            }
+            else
+            {
+                minBox.Text = string.Empty;
+                maxBox.Text = string.Empty;
+            }
+            
+          
+            if ((sensor.minHum != -5) && tempHum)
+            {
+                minBox.Text = Convert.ToString(sensor.minHum);
+                maxBox.Text = Convert.ToString(sensor.maxHum);
+            }
+            else
+            {
+                minBox.Text = string.Empty;
+                maxBox.Text = string.Empty;
+            }
+
+        }
+
+        private void minBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

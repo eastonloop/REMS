@@ -27,6 +27,7 @@ using System.IO.Packaging;
 using System.Media;
 using System.Windows.Media;
 using OfficeOpenXml.Drawing.Chart.Style;
+using DocumentFormat.OpenXml.Drawing;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -38,6 +39,7 @@ namespace Environment_Monitoring_System_Interface
         private SerialPort pigeon;
         private Thread serialThread;
         private Thread attourney;
+        private Thread lawyer;
         private Thread paperBoy;
         private Thread whistleTemp1;
         private Thread whistleTemp2;
@@ -66,6 +68,7 @@ namespace Environment_Monitoring_System_Interface
         private Thread theBritishAreComing;
         private Thread protester;
         private Thread hellmo;
+        private CancellationTokenSource cancellationTokenSource= new CancellationTokenSource();
         public string theDate;
 
         private List<double> tempDay;
@@ -74,6 +77,11 @@ namespace Environment_Monitoring_System_Interface
         public string path;
         public List<string> csvData;
         private string timeText;
+        private bool firstExcel = true;
+
+        private bool settingsExist = false;
+        SettingsPageForm newGuy;
+        public bool waitToSet;
 
         public SerialPort SerialPort
         {
@@ -92,16 +100,54 @@ namespace Environment_Monitoring_System_Interface
         Sensor sensor7 = new Sensor(7);
         Sensor sensor8 = new Sensor(8);
 
-        
 
+        public int count = 1;
+       
         public bool scale = false;
         public bool language = false;
         public bool file = false;
-        public int freq;
-        public string emailAddress;
+        public int freq = 2;
+        private string _emailAddress;
+
+        public bool scaleType
+        {
+            get { return scale; }
+            set { scale = value; }
+        }
+
+        public bool languageType
+        {
+            get { return language; }
+            set { language = value; }
+        }
+
+        public bool fileType
+        {
+            get { return file; }
+            set { file = value; }
+        }
+
+        public int freqType
+        {
+            get { return freq; }
+            set { freq = value; }
+        }
+
+        public string EmailAddress
+        {
+            get { return _emailAddress; }
+            set { _emailAddress = value; }
+        }
+
         public string tempType;
         public string batText;
         public bool noAlert;
+
+        public bool noAlertType
+        {
+            get { return noAlert; }
+            set { noAlert = value; }
+        }
 
         private System.Threading.Timer sequenceTime;
         private bool red = true;
@@ -732,6 +778,7 @@ namespace Environment_Monitoring_System_Interface
             sensors.Add(sensor6);
             sensors.Add(sensor7);
             sensors.Add(sensor8);
+        //    _emailAddress = "wwpool@mc.edu";
         }
 
         private void HomePageForm_Load(object sender, EventArgs e)
@@ -742,49 +789,142 @@ namespace Environment_Monitoring_System_Interface
 
         public void SettingsButton_Click(object sender, EventArgs e)
         {
-            SettingsPageForm newGuy = new SettingsPageForm();
+    
 
             this.Hide();
-            
-            newGuy.sensor1 = sensor1;
-            newGuy.sensor2 = sensor2;
-            newGuy.sensor3 = sensor3;
-            newGuy.sensor4 = sensor4;
-            newGuy.sensor5 = sensor5;
-            newGuy.sensor6 = sensor6;
-            newGuy.sensor7 = sensor7;
-            newGuy.sensor8 = sensor8;
+            if (newGuy == null)
+            {
+                newGuy = new SettingsPageForm(this);
+                newGuy.FormClosed += (s, args) => { newGuy = null; };
 
-            newGuy.ShowDialog();
+                newGuy.sensor1 = sensor1;
+                newGuy.sensor2 = sensor2;
+                newGuy.sensor3 = sensor3;
+                newGuy.sensor4 = sensor4;
+                newGuy.sensor5 = sensor5;
+                newGuy.sensor6 = sensor6;
+                newGuy.sensor7 = sensor7;
+                newGuy.sensor8 = sensor8;
+                newGuy.waitToSet = waitToSet;
+
+                newGuy.ShowDialog();
+            }
+            else
+                newGuy.Visible = true;
+
+           // waitToSet = true;
 
             this.Show();
 
-            scale = newGuy.scale;
-            language = newGuy.language;
-            file = newGuy.file;
-            freq = newGuy.freq;
-            emailAddress = newGuy.emailAddress;
-            noAlert = newGuy.noAlert;
-
+           // if (!waitToSet)
+           // {
+               // scale = newGuy.scale;
+               // language = newGuy.language;
+               // file = newGuy.file;
+               // freq = newGuy.freq;
+               // emailAddress = newGuy.emailAddress;
+               // noAlert = newGuy.noAlert;
+           // }
+            
             if (attourney == null)
-                attourney = new Thread(minuteTaker);
+                attourney = new Thread(dailyReport);
+      
 
-            newGuy = null;
+          //  newGuy = null;
 
-            if (!(emailAddress == null) && !(attourney.IsAlive))
+            if (!(_emailAddress == null) && !(attourney.IsAlive))
             {
                 attourney.Start();
             }
             updateElements();
         }        
+        public void dailyReport()
+        {
+            while (true)
+            {
+                for (int i = 0; i < 24; i++)
+                {
+                    Thread.Sleep(1000*1200);
+                    sensor1.takeAvg();
+                    sensor2.takeAvg();
+                    sensor3.takeAvg();
+                    sensor4.takeAvg();
+                    sensor5.takeAvg();
+                    sensor6.takeAvg();
+                    sensor7.takeAvg();
+                    sensor8.takeAvg();
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    tempDay.Add(0);
+                    humDay.Add(0);
+                    batDay.Add(0);
+                }
 
+                tempDay[0] = Math.Round(100 * sensor1.dailyTempAvg()) / 100;
+                tempDay[1] = Math.Round(100 * sensor2.dailyTempAvg()) / 100;
+                tempDay[2] = Math.Round(100 * sensor3.dailyTempAvg()) / 100;
+                tempDay[3] = Math.Round(100 * sensor4.dailyTempAvg()) / 100;
+                tempDay[4] = Math.Round(100 * sensor5.dailyTempAvg()) / 100;
+                tempDay[5] = Math.Round(100 * sensor6.dailyTempAvg()) / 100;
+                tempDay[6] = Math.Round(100 * sensor7.dailyTempAvg()) / 100;
+                tempDay[7] = Math.Round(100 * sensor8.dailyTempAvg()) / 100;
+
+                humDay[0] = Math.Round(100 * sensor1.dailyHumAvg()) / 100;
+                humDay[1] = Math.Round(100 * sensor2.dailyHumAvg()) / 100;
+                humDay[2] = Math.Round(100 * sensor3.dailyHumAvg()) / 100;
+                humDay[3] = Math.Round(100 * sensor4.dailyHumAvg()) / 100;
+                humDay[4] = Math.Round(100 * sensor5.dailyHumAvg()) / 100;
+                humDay[5] = Math.Round(100 * sensor6.dailyHumAvg()) / 100;
+                humDay[6] = Math.Round(100 * sensor7.dailyHumAvg()) / 100;
+                humDay[7] = Math.Round(100 * sensor8.dailyHumAvg()) / 100;
+
+                batDay[0] = sensor1.bat;
+                batDay[1] = sensor2.bat;
+                batDay[2] = sensor3.bat;
+                batDay[3] = sensor4.bat;
+                batDay[4] = sensor5.bat;
+                batDay[5] = sensor6.bat;
+                batDay[6] = sensor7.bat;
+                batDay[7] = sensor8.bat;
+
+                if (file)
+                {
+                    excelOut();
+                }
+                else
+                    csvOut();
+
+                
+                tempDay.Clear();
+                humDay.Clear();
+                batDay.Clear();
+
+                /*
+                if (attourney.IsAlive)
+                {
+                    attourney.Abort();
+                }
+                else
+                {
+                    lawyer.Abort();
+                }
+                */
+            }
+            
+
+        }
+            
+        
+
+        /*
         public void minuteTaker()
         {
             paperBoy = new Thread(dailyReport);
             paperBoy.Start();
             while (!(this.IsDisposed))
             {
-                Thread.Sleep(1000 * 25);
+                Thread.Sleep(1000);
                 sensor1.takeAvg();
                 sensor2.takeAvg();
                 sensor3.takeAvg();
@@ -798,9 +938,9 @@ namespace Environment_Monitoring_System_Interface
 
         private void dailyReport()
         {
-            while (!(this.IsDisposed))
+            while (!(IsDisposed))
             {
-                Thread.Sleep(1000 * 60 * 10);
+                Thread.Sleep(1000 * 24);
 
                 for (int i = 0; i < 8; i++)
                 {
@@ -844,9 +984,17 @@ namespace Environment_Monitoring_System_Interface
                 tempDay.Clear();
                 humDay.Clear();
                 batDay.Clear();
-            }
-        }
 
+                lawyer = new Thread(minuteTaker);
+                lawyer.Start();
+                attourney.Abort();
+                paperBoy.Abort();
+
+         
+            }
+           
+        }
+        */
         private void updateElements()
         {
             if (scale)
@@ -890,88 +1038,112 @@ namespace Environment_Monitoring_System_Interface
 
         public void excelOut()
         {
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-            
-            using (ExcelPackage package = new ExcelPackage())
+            try
             {
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
                 ExcelWorksheet report;
 
-                theDate = DateTime.Today.ToString().Split(' ')[0];
-
-                if (language)
-                    report = package.Workbook.Worksheets.Add("Reporte Diario");
-                else
-                    report = package.Workbook.Worksheets.Add("Daily Report");
-
-                if (scale)
-                    tempType = " °C";
-                else
-                    tempType = " °F";
-
-                report.Cells[1, 1].Value = theDate;
-
-                for (int i = 0; i < 8; i++)
-                {
-                    report.Cells[2, i * 3 + 3].Value = "Sensor " + (i + 1);
-
-                    if (language)
-                    {
-                        report.Name = "REMS Reporte Diario- " + theDate;
-                        report.Cells[3, i * 3 + 2].Value = "Temperatura Media";
-                        report.Cells[3, i * 3 + 3].Value = "Humedad Promedio";
-                        report.Cells[3, i * 3 + 4].Value = "Último Nivel de Batería";
-                        batText = " Voltios";
-                        report.Cells[30, 1].Value = "Acumulativo";
-                    }
-                    else
-                    {
-                        report.Name = "REMS Daily Report- " + theDate;
-                        report.Cells[3, i * 3 + 2].Value = "Average Temperature";
-                        report.Cells[3, i * 3 + 3].Value = "Average Humidity";
-                        report.Cells[3, i * 3 + 4].Value = "Latest Battery Level";
-                        batText = " Volts";
-                        report.Cells[30, 1].Value = "Cumulative";
-                    }
-                }
-
-                for (int i = 1; i < 9; i++)
-                {
-                    Sensor americanPeople = sensors[i - 1];
-
-                    report.Cells[2, i * 3 - 1].Value = "CPU: " + americanPeople.sendCount;
-                    report.Cells[2, i * 3 + 1].Value = "GUI: " + americanPeople.catchCount;
-
-                    for (int j = 4; j < 28; j++)
-                    {
-                        report.Cells[j, i * 3 - 1].Value = americanPeople.tempAvg[j - 4] + tempType;
-                        report.Cells[j, i * 3].Value = americanPeople.humAvg[j - 4] + " %";
-                        report.Cells[j, i * 3 + 1].Value = americanPeople.lastBat[j - 4] + batText;
-                    }
-
-                    report.Cells[30, i * 3 - 1].Value = tempDay[i - 1] + tempType;
-                    report.Cells[30, i * 3].Value = humDay[i - 1] + " %";
-                    report.Cells[30, i * 3 + 1].Value = batDay[i - 1] + batText;
-
-                    americanPeople.tempAvg.Clear();
-                    americanPeople.humAvg.Clear();
-                    americanPeople.lastBat.Clear();
-                    americanPeople.catchCount = 0;
-                }
-
                 if (language)
                 {
-                    path = "Reporte Diario.xlsx";
-                    package.SaveAs(new FileInfo(path));
+                    path = @"C:\Downloads\ReporteDiario.xlsx";
                 }
                 else
                 {
-                    path = "Daily Report.xlsx";
-                    package.SaveAs(new FileInfo(path));
+                    path = @"C:\Downloads\DailyReport.xlsx";
                 }
 
-                path = System.IO.Path.GetFullPath(path);
 
-                MailMan.SendReport(emailAddress, language, theDate, path);
+                    using (ExcelPackage package = new ExcelPackage())
+                    {
+
+                        theDate = DateTime.Today.ToString().Split(' ')[0];
+
+                        if (language)
+                            report = package.Workbook.Worksheets.Add("Reportante");
+                        else
+                            report = package.Workbook.Worksheets.Add("Report");
+
+                        if (scale)
+                            tempType = " °C";
+                        else
+                            tempType = " °F";
+
+                        report.Cells[1, 1].Value = theDate;
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            report.Cells[2, i * 3 + 3].Value = "Sensor " + (i + 1);
+
+                            if (language)
+                            {
+                                report.Name = "REMS Reporte Diario- " + theDate;
+                                report.Cells[3, i * 3 + 2].Value = "Temperatura Media";
+                                report.Cells[3, i * 3 + 3].Value = "Humedad Promedio";
+                                report.Cells[3, i * 3 + 4].Value = "Último Nivel de Batería";
+                                batText = " Voltios";
+                                report.Cells[30, 1].Value = "Acumulativo";
+                            }
+                            else
+                            {
+                                report.Name = "REMS Daily Report- " + theDate;
+                                report.Cells[3, i * 3 + 2].Value = "Average Temperature";
+                                report.Cells[3, i * 3 + 3].Value = "Average Humidity";
+                                report.Cells[3, i * 3 + 4].Value = "Latest Battery Level";
+                                batText = " Volts";
+                                report.Cells[30, 1].Value = "Cumulative";
+                            }
+                        }
+
+                        for (int i = 1; i < 9; i++)
+                        {
+                            Sensor americanPeople = sensors[i - 1];
+
+                            report.Cells[2, i * 3 - 1].Value = "CPU: " + americanPeople.sendCount;
+                            report.Cells[2, i * 3 + 1].Value = "GUI: " + americanPeople.catchCount;
+
+                            for (int j = 4; j < 28; j++)
+                            {
+                                report.Cells[j, i * 3 - 1].Value = americanPeople.tempAvg[j - 4] + tempType;
+                                report.Cells[j, i * 3].Value = americanPeople.humAvg[j - 4] + " %";
+                                report.Cells[j, i * 3 + 1].Value = americanPeople.lastBat[j - 4] + batText;
+                            }
+
+                            report.Cells[30, i * 3 - 1].Value = tempDay[i - 1] + tempType;
+                            report.Cells[30, i * 3].Value = humDay[i - 1] + " %";
+                            report.Cells[30, i * 3 + 1].Value = batDay[i - 1] + batText;
+
+                            americanPeople.tempAvg.Clear();
+                            americanPeople.humAvg.Clear();
+                            americanPeople.lastBat.Clear();
+                            americanPeople.catchCount = 0;
+                        }
+                        using (var stream = new MemoryStream())
+                        {
+                            package.SaveAs(stream);
+                            stream.Position = 0;
+                            if (!(_emailAddress == null))
+                                MailMan.SendReport(_emailAddress, language, theDate, stream);
+
+                        }
+
+
+
+                        //package.Save();
+                     
+                    }
+
+                
+               
+                    
+            }
+
+                // Dispose of the ExcelPackage before deleting the file
+               
+            
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -993,87 +1165,110 @@ namespace Environment_Monitoring_System_Interface
             path = System.IO.Path.Combine(Environment.CurrentDirectory, path);
 
             List<Sensor> sensors = new List<Sensor>
-            {
-                sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7, sensor8
-            };
+    {
+        sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7, sensor8
+    };
 
             if (scale)
                 tempType = " °C";
             else
                 tempType = " °F";
 
-            using (StreamWriter writer = new StreamWriter(path, false))
+            bool fileSaved = false;
+            int retries = 3;
+            while (!fileSaved && retries > 0)
             {
-                writer.WriteLine(DateTime.Now.ToString());
-                writer.WriteLine('\n');
-
-                if (language)
+                try
                 {
-                    writer.Write("Tiempo,");
-                }
-                else
-                {
-                    writer.Write("Time,");
-                }
-
-                for (int i = 0; i < sensors.Count; i++)
-                {
-                    for (int j = 0; j < 3; j++)
+                    using (StreamWriter writer = new StreamWriter(path, false))
                     {
-                        writer.Write(sensors[i].name + ",");
+                        writer.WriteLine(DateTime.Now.ToString());
+                        writer.WriteLine('\n');
+
+                        if (language)
+                        {
+                            writer.Write("Tiempo,");
+                        }
+                        else
+                        {
+                            writer.Write("Time,");
+                        }
+
+                        for (int i = 0; i < sensors.Count; i++)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                writer.Write(sensors[i].name + ",");
+                            }
+                        }
+
+                        writer.Write('\n');
+
+                        for (int i = 0; i < sensors.Count; i++)
+                        {
+                            if (language)
+                            {
+                                writer.WriteLine("Tiempo, Temperatura, Humedad, Nivel de Bateria" + ",");
+                            }
+                            else
+                                writer.WriteLine("Time, Temperature, Humidity, Battery Level" + ",");
+                        }
+
+                        writer.WriteLine('\n');
+
+                        for (int i = 0; i < sensors[0].tempAvg.Count; i++)
+                        {
+                            writer.Write(timeText + (i + 1).ToString() + ",");
+
+                            for (int j = 0; j < sensors.Count; j++)
+                            {
+                                writer.Write(sensors[j].tempAvg[i] + tempType + "," + sensors[j].humAvg[i]
+                                + " %" + "," + sensors[j].lastBat[i] + batText + ",");
+                            }
+
+                            writer.WriteLine("\n");
+                        }
+
+                        if (language)
+                        {
+                            writer.Write("Acumulativo" + ",");
+                        }
+                        else
+                        {
+                            writer.Write("Cumulative" + ",");
+                        }
+
+                        for (int i = 0; i < sensors.Count; i++)
+                        {
+                            writer.Write(sensors[i].name + "," + tempDay[i] + tempType + "," + humDay[i]
+                                + " %" + "," + sensors[i].bat + batText + ",");
+
+                            sensors[i].tempAvg.Clear();
+                            sensors[i].humAvg.Clear();
+                            sensors[i].lastBat.Clear();
+                            sensors[i].catchCount = 0;
+                        }
+                        writer.Dispose();
                     }
+                    fileSaved = true;
+
                 }
-
-                writer.Write('\n');
-
-                for (int i = 0; i < sensors.Count; i++)
+                catch (IOException)
                 {
-                    if (language)
-                    {
-                        writer.WriteLine("Tiempo, Temperatura, Humedad, Nivel de Bateria" + ",");
-                    }
-                    else
-                        writer.WriteLine("Time, Temperature, Humidity, Battery Level" + ",");
-                }
-
-                writer.WriteLine('\n');
-
-                for (int i = 0; i < sensors[0].tempAvg.Count; i++)
-                {
-                    writer.Write(timeText + (i + 1).ToString() + ",");
-
-                    for (int j = 0; j < sensors.Count; j++)
-                    {
-                        writer.Write(sensors[j].tempAvg[i] + tempType + "," + sensors[j].humAvg[i]
-                        + " %" + "," + sensors[j].lastBat[i] + batText + ",");
-                    }
-
-                    writer.WriteLine("\n");
-                }
-
-                if (language)
-                {
-                    writer.Write("Acumulativo" + ",");
-                }
-                else
-                {
-                    writer.Write("Cumulative" + ",");
-                }
-
-                for (int i = 0; i < sensors.Count; i++)
-                {
-                    writer.Write(sensors[i].name + "," + tempDay[i] + tempType + "," + humDay[i] 
-                        + " %" + "," + sensors[i].bat + batText + ",");
-                    
-                    sensors[i].tempAvg.Clear();
-                    sensors[i].humAvg.Clear();
-                    sensors[i].lastBat.Clear();
-                    sensors[i].catchCount = 0;
+                    // Wait for a short period before retrying
+                    System.Threading.Thread.Sleep(1000); // 1 second
+                    retries--;
                 }
             }
 
-            MailMan.SendReport(emailAddress, language, theDate, path);
+           /* if (fileSaved && !string.IsNullOrEmpty(_emailAddress))
+            {
+                MailMan.SendReport(_emailAddress, language, theDate, path);
+                
+            }
+           */
         }
+
 
         public void Alert(Sensor culprit, bool quantity)
         {
@@ -1235,10 +1430,10 @@ namespace Environment_Monitoring_System_Interface
         {
             if (!noAlert)
             {
-                while (culprit.bat < 2.42 && culprit.bat > 1 && !(emailAddress == null))
+                while (culprit.bat < 2.42 && culprit.bat > 1 && !(_emailAddress == null))
                 {
-                    MailMan.SendBat(emailAddress, language, culprit);
-                    Thread.Sleep(1000 * 60 * 60 * freq);
+                    MailMan.SendBat(_emailAddress, language, culprit);
+                    Thread.Sleep(1000 * 60 * freq);
                 }
             }
 
@@ -1284,17 +1479,17 @@ namespace Environment_Monitoring_System_Interface
         {
                    if (quantity && !noAlert)
                    {
-                       while (culprit.breachHum)
+                       while (culprit.breachHum  && !(_emailAddress == null))
                        {
-                           MailMan.SendAlert(emailAddress, language, culprit, quantity, culprit.inequality);
+                           MailMan.SendAlert(_emailAddress, language, culprit, quantity, culprit.inequality);
                            Thread.Sleep(1000 * 60 * freq);
                        }
                    }
                    else if (!quantity && !noAlert)
                    {
-                       while (culprit.breachTemp)
+                       while (culprit.breachTemp && !(_emailAddress == null))
                        {
-                           MailMan.SendAlert(emailAddress, language, culprit, quantity, culprit.inequality);
+                           MailMan.SendAlert(_emailAddress, language, culprit, quantity, culprit.inequality);
                            Thread.Sleep(1000 * 60 * freq);
                        }
                    }

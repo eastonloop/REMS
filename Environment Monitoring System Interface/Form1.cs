@@ -49,18 +49,18 @@ namespace Environment_Monitoring_System_Interface
         {
             string[] comPorts = GetCOMPorts();
 
-          //  foreach (string port in comPorts)
-          //  for (int i = 1; i <= 20; i++)
-          //  {
+            foreach (string port in comPorts)
+            //for (int i = 1; i <= 20; i++)
+            {
                 if (serialPort1.IsOpen)
                 {
                     return;
                 }
 
-                
 
-                //  serialPort1.PortName = port;
-                serialPort1.PortName = "COM6";
+
+                serialPort1.PortName = port;
+               // serialPort1.PortName = "COM6";
                 serialPort1.BaudRate = 9600;
                 serialPort1.DtrEnable = true;
                 serialPort1.DataBits = 8;
@@ -90,7 +90,7 @@ namespace Environment_Monitoring_System_Interface
                 {
                     welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
                 }
-         //   }
+            }
         }
 
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)

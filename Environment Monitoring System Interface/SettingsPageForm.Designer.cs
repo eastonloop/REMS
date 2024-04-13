@@ -57,8 +57,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.fileBox = new System.Windows.Forms.ComboBox();
+            this.dailyEmailLabel = new System.Windows.Forms.Label();
+            this.yesButton = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.noButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -66,7 +71,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(363, 29);
+            this.label1.Location = new System.Drawing.Point(415, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 37);
             this.label1.TabIndex = 0;
@@ -241,15 +246,16 @@
             // minBox
             // 
             this.minBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minBox.Location = new System.Drawing.Point(556, 341);
+            this.minBox.Location = new System.Drawing.Point(618, 344);
             this.minBox.Name = "minBox";
             this.minBox.Size = new System.Drawing.Size(73, 35);
             this.minBox.TabIndex = 13;
+            this.minBox.TextChanged += new System.EventHandler(this.minBox_TextChanged);
             // 
             // maxBox
             // 
             this.maxBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxBox.Location = new System.Drawing.Point(707, 341);
+            this.maxBox.Location = new System.Drawing.Point(802, 344);
             this.maxBox.Name = "maxBox";
             this.maxBox.Size = new System.Drawing.Size(73, 35);
             this.maxBox.TabIndex = 14;
@@ -258,7 +264,7 @@
             // 
             this.minLabel.AutoSize = true;
             this.minLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minLabel.Location = new System.Drawing.Point(566, 309);
+            this.minLabel.Location = new System.Drawing.Point(630, 309);
             this.minLabel.Name = "minLabel";
             this.minLabel.Size = new System.Drawing.Size(52, 29);
             this.minLabel.TabIndex = 15;
@@ -268,7 +274,7 @@
             // 
             this.maxLabel.AutoSize = true;
             this.maxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxLabel.Location = new System.Drawing.Point(715, 309);
+            this.maxLabel.Location = new System.Drawing.Point(805, 309);
             this.maxLabel.Name = "maxLabel";
             this.maxLabel.Size = new System.Drawing.Size(57, 29);
             this.maxLabel.TabIndex = 16;
@@ -278,7 +284,7 @@
             // 
             this.submitButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitButton.Location = new System.Drawing.Point(599, 418);
+            this.submitButton.Location = new System.Drawing.Point(688, 418);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(134, 54);
             this.submitButton.TabIndex = 17;
@@ -290,7 +296,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(594, 96);
+            this.label2.Location = new System.Drawing.Point(687, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(135, 29);
             this.label2.TabIndex = 18;
@@ -300,7 +306,7 @@
             // 
             this.minTypeLabel.AutoSize = true;
             this.minTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minTypeLabel.Location = new System.Drawing.Point(635, 344);
+            this.minTypeLabel.Location = new System.Drawing.Point(697, 347);
             this.minTypeLabel.Name = "minTypeLabel";
             this.minTypeLabel.Size = new System.Drawing.Size(36, 29);
             this.minTypeLabel.TabIndex = 19;
@@ -310,7 +316,7 @@
             // 
             this.maxTypeLabel.AutoSize = true;
             this.maxTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxTypeLabel.Location = new System.Drawing.Point(786, 344);
+            this.maxTypeLabel.Location = new System.Drawing.Point(881, 347);
             this.maxTypeLabel.Name = "maxTypeLabel";
             this.maxTypeLabel.Size = new System.Drawing.Size(36, 29);
             this.maxTypeLabel.TabIndex = 20;
@@ -330,7 +336,7 @@
             // 
             this.frequencyLabel.AutoSize = true;
             this.frequencyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.frequencyLabel.Location = new System.Drawing.Point(57, 355);
+            this.frequencyLabel.Location = new System.Drawing.Point(12, 354);
             this.frequencyLabel.Name = "frequencyLabel";
             this.frequencyLabel.Size = new System.Drawing.Size(306, 58);
             this.frequencyLabel.TabIndex = 22;
@@ -383,7 +389,7 @@
             this.groupBox1.Controls.Add(this.sensor6Button);
             this.groupBox1.Controls.Add(this.sensor7Button);
             this.groupBox1.Controls.Add(this.sensor8Button);
-            this.groupBox1.Location = new System.Drawing.Point(481, 128);
+            this.groupBox1.Location = new System.Drawing.Point(571, 128);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(368, 107);
             this.groupBox1.TabIndex = 26;
@@ -393,7 +399,7 @@
             // 
             this.groupBox2.Controls.Add(this.tempButton);
             this.groupBox2.Controls.Add(this.humButton);
-            this.groupBox2.Location = new System.Drawing.Point(525, 241);
+            this.groupBox2.Location = new System.Drawing.Point(616, 240);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(284, 59);
             this.groupBox2.TabIndex = 27;
@@ -412,11 +418,59 @@
             this.fileBox.Text = "File Type";
             this.fileBox.SelectedIndexChanged += new System.EventHandler(this.fileBox_SelectedIndexChanged);
             // 
+            // dailyEmailLabel
+            // 
+            this.dailyEmailLabel.AutoSize = true;
+            this.dailyEmailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dailyEmailLabel.Location = new System.Drawing.Point(331, 354);
+            this.dailyEmailLabel.Name = "dailyEmailLabel";
+            this.dailyEmailLabel.Size = new System.Drawing.Size(281, 58);
+            this.dailyEmailLabel.TabIndex = 29;
+            this.dailyEmailLabel.Text = "Would you like to receive\r\ndaily reports?";
+            this.dailyEmailLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dailyEmailLabel.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // yesButton
+            // 
+            this.yesButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.yesButton.AutoSize = true;
+            this.yesButton.Location = new System.Drawing.Point(6, 21);
+            this.yesButton.Name = "yesButton";
+            this.yesButton.Size = new System.Drawing.Size(47, 30);
+            this.yesButton.TabIndex = 30;
+            this.yesButton.TabStop = true;
+            this.yesButton.Text = "Yes";
+            this.yesButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.noButton);
+            this.groupBox3.Controls.Add(this.yesButton);
+            this.groupBox3.Location = new System.Drawing.Point(401, 418);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(137, 57);
+            this.groupBox3.TabIndex = 31;
+            this.groupBox3.TabStop = false;
+            // 
+            // noButton
+            // 
+            this.noButton.Appearance = System.Windows.Forms.Appearance.Button;
+            this.noButton.AutoSize = true;
+            this.noButton.Location = new System.Drawing.Point(92, 21);
+            this.noButton.Name = "noButton";
+            this.noButton.Size = new System.Drawing.Size(39, 30);
+            this.noButton.TabIndex = 31;
+            this.noButton.TabStop = true;
+            this.noButton.Text = "No";
+            this.noButton.UseVisualStyleBackColor = true;
+            // 
             // SettingsPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 523);
+            this.ClientSize = new System.Drawing.Size(972, 523);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.dailyEmailLabel);
             this.Controls.Add(this.fileBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -442,6 +496,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,5 +534,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox fileBox;
+        private System.Windows.Forms.Label dailyEmailLabel;
+        private System.Windows.Forms.RadioButton yesButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton noButton;
     }
 }

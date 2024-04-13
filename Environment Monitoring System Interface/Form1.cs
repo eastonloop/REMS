@@ -36,25 +36,25 @@ namespace Environment_Monitoring_System_Interface
         {
             string[] comPorts = GetCOMPorts();
 
-            //  foreach (string port in comPorts)
-            //  for (int i = 1; i <= 20; i++)
-            //  {
-            if (serialPort1.IsOpen)
+            foreach (string port in comPorts)
+            //for (int i = 1; i <= 20; i++)
             {
-                return;
-            }
+                if (serialPort1.IsOpen)
+                {
+                    return;
+                }
 
 
 
-            //  serialPort1.PortName = port;
-            serialPort1.PortName = "COM6";
-            serialPort1.BaudRate = 9600;
-            serialPort1.DtrEnable = true;
-            serialPort1.DataBits = 8;
-            serialPort1.Parity = Parity.None;
-            serialPort1.StopBits = StopBits.One;
-            serialPort1.Handshake = Handshake.None;
-            serialPort1.Encoding = System.Text.Encoding.Default;
+                serialPort1.PortName = port;
+               // serialPort1.PortName = "COM6";
+                serialPort1.BaudRate = 9600;
+                serialPort1.DtrEnable = true;
+                serialPort1.DataBits = 8;
+                serialPort1.Parity = Parity.None;
+                serialPort1.StopBits = StopBits.One;
+                serialPort1.Handshake = Handshake.None;
+                serialPort1.Encoding = System.Text.Encoding.Default;
 
             try
             {
@@ -66,19 +66,18 @@ namespace Environment_Monitoring_System_Interface
 
                 await Task.WhenAny(responseTask, timeoutTask);
 
-                serialPort1.Open();
-                if (serialPort1.IsOpen)
-                    isConnectedToCU = true;
-                    welcomeMessageBox.Text = "Connected";
-                if (stop)
-                    serialPort1.DataReceived += SerialPort1_DataReceived;
-                return;
+                    serialPort1.Open();
+                    if(serialPort1.IsOpen) 
+                        isConnectedToCU = true;
+                    if (stop)
+                        serialPort1.DataReceived += SerialPort1_DataReceived;
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
+                }
             }
-            catch (Exception ex)
-            {
-                welcomeMessageBox.Text = $"Exception during COM port communication: {ex.Message}";
-            }
-            //   }
         }
 
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)

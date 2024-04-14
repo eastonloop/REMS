@@ -1,14 +1,10 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
+using System.Media;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.Collections;
@@ -100,6 +96,16 @@ namespace Environment_Monitoring_System_Interface
         Sensor sensor7 = new Sensor(7);
         Sensor sensor8 = new Sensor(8);
 
+        int s1count = 0;
+        int s2count = 0;
+        int s3count = 0;
+        int s4count = 0;
+        int s5count = 0;
+        int s6count = 0;
+        int s7count = 0;
+        int s8count = 0;
+
+
 
         public int count = 1;
        
@@ -154,24 +160,24 @@ namespace Environment_Monitoring_System_Interface
         int i = 0;
         private SoundPlayer soundPlayer;
 
-        
+
         private void doStuff()
         {
             pigeon.DataReceived += ListenUp;
         }
-               
+
         private void ListenUp(object sender, SerialDataReceivedEventArgs e)
         {
             try
             {
-                if(pigeon.BytesToRead>0)
+                if (pigeon.BytesToRead > 0)
                 {
                     message = pigeon.ReadLine();
                     if (message != "\r")
                     {
                         PigeonDataReceived(message);
                     }
-                }                 
+                }
             }
             catch (Exception)
             {
@@ -184,12 +190,22 @@ namespace Environment_Monitoring_System_Interface
             transmitData = message.Split(':');
 
             whichSens = Convert.ToInt16(transmitData[0]);
+            string messagesDelivered = transmitData[5];
+            string attempts = transmitData[6];
+            string totalRetries = transmitData[7];
 
             switch (whichSens)
             {
                 case 1:
+                    s1count++;
+
+                    pc1.Invoke((MethodInvoker)delegate
+                    {
+                        pc1.Text = Convert.ToString(s1count);
+                    });
+
                     sensor1.addData(transmitData, scale);
- 
+
                     temp1Box.Invoke((MethodInvoker)delegate
                     {
                         temp1Box.Text = Convert.ToString(Math.Round(sensor1.holdTemp));
@@ -217,6 +233,18 @@ namespace Environment_Monitoring_System_Interface
                             bat1Label.Text = "";
                             bat1Label.BackColor = sensorFeedLabel.BackColor;
                         }
+                    });
+                    label1.Invoke((MethodInvoker)delegate
+                    {
+                        label1.Text = messagesDelivered;
+                    });
+                    label2.Invoke((MethodInvoker)delegate
+                    {
+                        label2.Text = attempts;
+                    });
+                    label3.Invoke((MethodInvoker)delegate
+                    {
+                        label3.Text = totalRetries;
                     });
 
                     sensor1Label.BackColor = sensorFeedLabel.BackColor;
@@ -258,6 +286,14 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 2:
+
+                    s2count++;
+
+                    pc2.Invoke((MethodInvoker)delegate
+                    {
+                        pc2.Text = Convert.ToString(s2count);
+                    });
+
                     sensor2.addData(transmitData, scale);
 
                     temp2Box.Invoke((MethodInvoker)delegate
@@ -268,6 +304,19 @@ namespace Environment_Monitoring_System_Interface
                     hum2Box.Invoke((MethodInvoker)delegate
                     {
                         hum2Box.Text = Convert.ToString(Math.Round(sensor2.holdHum));
+                    });
+
+                    label4.Invoke((MethodInvoker)delegate
+                    {
+                        label4.Text = messagesDelivered;
+                    });
+                    label5.Invoke((MethodInvoker)delegate
+                    {
+                        label5.Text = attempts;
+                    });
+                    label6.Invoke((MethodInvoker)delegate
+                    {
+                        label6.Text = totalRetries;
                     });
 
                     bat2Label.Invoke((MethodInvoker)delegate
@@ -336,6 +385,14 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 3:
+
+                    s3count++;
+
+                    pc3.Invoke((MethodInvoker)delegate
+                    {
+                        pc3.Text = Convert.ToString(s3count);
+                    });
+
                     sensor3.addData(transmitData, scale);
 
                     temp3Box.Invoke((MethodInvoker)delegate
@@ -346,6 +403,18 @@ namespace Environment_Monitoring_System_Interface
                     hum3Box.Invoke((MethodInvoker)delegate
                     {
                         hum3Box.Text = Convert.ToString(Math.Round(sensor3.holdHum));
+                    });
+                    label7.Invoke((MethodInvoker)delegate
+                    {
+                        label7.Text = messagesDelivered;
+                    });
+                    label8.Invoke((MethodInvoker)delegate
+                    {
+                        label8.Text = attempts;
+                    });
+                    label9.Invoke((MethodInvoker)delegate
+                    {
+                        label9.Text = totalRetries;
                     });
 
                     bat3Label.Invoke((MethodInvoker)delegate
@@ -406,8 +475,15 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 4:
+                    s4count++;
+
+                    pc4.Invoke((MethodInvoker)delegate
+                    {
+                        pc4.Text = Convert.ToString(s4count);
+                    });
+
                     sensor4.addData(transmitData, scale);
-                    
+
                     temp4Box.Invoke((MethodInvoker)delegate
                     {
                         temp4Box.Text = Convert.ToString(Math.Round(sensor4.holdTemp));
@@ -416,6 +492,19 @@ namespace Environment_Monitoring_System_Interface
                     hum4Box.Invoke((MethodInvoker)delegate
                     {
                         hum4Box.Text = Convert.ToString(Math.Round(sensor4.holdHum));
+                    });
+
+                    label10.Invoke((MethodInvoker)delegate
+                    {
+                        label10.Text = messagesDelivered;
+                    });
+                    label11.Invoke((MethodInvoker)delegate
+                    {
+                        label11.Text = attempts;
+                    });
+                    label12.Invoke((MethodInvoker)delegate
+                    {
+                        label12.Text = totalRetries;
                     });
 
                     bat4Label.Invoke((MethodInvoker)delegate
@@ -476,8 +565,15 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 5:
+                    s5count++;
+
+                    pc5.Invoke((MethodInvoker)delegate
+                    {
+                        pc5.Text = Convert.ToString(s5count);
+                    });
+
                     sensor5.addData(transmitData, scale);
-                    
+
                     temp5Box.Invoke((MethodInvoker)delegate
                     {
                         temp5Box.Text = Convert.ToString(Math.Round(sensor5.holdTemp));
@@ -486,6 +582,19 @@ namespace Environment_Monitoring_System_Interface
                     hum5Box.Invoke((MethodInvoker)delegate
                     {
                         hum5Box.Text = Convert.ToString(Math.Round(sensor5.holdHum));
+                    });
+
+                    label13.Invoke((MethodInvoker)delegate
+                    {
+                        label13.Text = messagesDelivered;
+                    });
+                    label14.Invoke((MethodInvoker)delegate
+                    {
+                        label14.Text = attempts;
+                    });
+                    label15.Invoke((MethodInvoker)delegate
+                    {
+                        label15.Text = totalRetries;
                     });
 
                     bat5Label.Invoke((MethodInvoker)delegate
@@ -546,8 +655,15 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 6:
+                    s6count++;
+
+                    pc6.Invoke((MethodInvoker)delegate
+                    {
+                        pc6.Text = Convert.ToString(s6count);
+                    });
+
                     sensor6.addData(transmitData, scale);
-                    
+
                     temp6Box.Invoke((MethodInvoker)delegate
                     {
                         temp6Box.Text = Convert.ToString(Math.Round(sensor6.holdTemp));
@@ -556,6 +672,19 @@ namespace Environment_Monitoring_System_Interface
                     hum6Box.Invoke((MethodInvoker)delegate
                     {
                         hum6Box.Text = Convert.ToString(Math.Round(sensor6.holdHum));
+                    });
+
+                    label16.Invoke((MethodInvoker)delegate
+                    {
+                        label16.Text = messagesDelivered;
+                    });
+                    label17.Invoke((MethodInvoker)delegate
+                    {
+                        label17.Text = attempts;
+                    });
+                    label18.Invoke((MethodInvoker)delegate
+                    {
+                        label18.Text = totalRetries;
                     });
 
                     bat6Label.Invoke((MethodInvoker)delegate
@@ -616,8 +745,15 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 7:
+                    s7count++;
+
+                    pc7.Invoke((MethodInvoker)delegate
+                    {
+                        pc7.Text = Convert.ToString(s7count);
+                    });
+
                     sensor7.addData(transmitData, scale);
-                    
+
                     temp7Box.Invoke((MethodInvoker)delegate
                     {
                         temp7Box.Text = Convert.ToString(Math.Round(sensor7.holdTemp));
@@ -626,6 +762,19 @@ namespace Environment_Monitoring_System_Interface
                     hum7Box.Invoke((MethodInvoker)delegate
                     {
                         hum7Box.Text = Convert.ToString(Math.Round(sensor7.holdHum));
+                    });
+
+                    label19.Invoke((MethodInvoker)delegate
+                    {
+                        label19.Text = messagesDelivered;
+                    });
+                    label20.Invoke((MethodInvoker)delegate
+                    {
+                        label20.Text = attempts;
+                    });
+                    label21.Invoke((MethodInvoker)delegate
+                    {
+                        label21.Text = totalRetries;
                     });
 
                     bat7Label.Invoke((MethodInvoker)delegate
@@ -686,8 +835,15 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 8:
+                    s8count++;
+
+                    pc8.Invoke((MethodInvoker)delegate
+                    {
+                        pc8.Text = Convert.ToString(s8count);
+                    });
+
                     sensor8.addData(transmitData, scale);
-                    
+
                     temp8Box.Invoke((MethodInvoker)delegate
                     {
                         temp8Box.Text = Convert.ToString(Math.Round(sensor8.holdTemp));
@@ -697,6 +853,19 @@ namespace Environment_Monitoring_System_Interface
                     {
                         hum8Box.Text = Convert.ToString(Math.Round(sensor8.holdHum));
                     });
+
+                    label22.Invoke((MethodInvoker)delegate
+                    {
+                        label22.Text = messagesDelivered;
+                    });
+                    label23.Invoke((MethodInvoker)delegate
+                    {
+                        label23.Text = attempts;
+                    });
+                    label24.Invoke((MethodInvoker)delegate
+                    {
+                        label24.Text = totalRetries;
+                    }); 
 
                     bat8Label.Invoke((MethodInvoker)delegate
                     {
@@ -758,8 +927,8 @@ namespace Environment_Monitoring_System_Interface
                 default: break;
             }
         }
-                
-      
+
+
         public HomePageForm()
         {
             InitializeComponent();
@@ -980,7 +1149,7 @@ namespace Environment_Monitoring_System_Interface
                     excelOut();
                 else
                     csvOut();
-               
+
                 tempDay.Clear();
                 humDay.Clear();
                 batDay.Clear();
@@ -1293,7 +1462,7 @@ namespace Environment_Monitoring_System_Interface
         {
             theBritishAreComing = new Thread(() => PeriodicEmail(culprit, quantity));
             theBritishAreComing.Start();
-     
+
             protester = new Thread(() => Visual(culprit, quantity));
             protester.Start();
 
@@ -1490,7 +1659,7 @@ namespace Environment_Monitoring_System_Interface
                     whistleBat8.Abort();
                     whistleBat8 = null;
                     break;
-                default:break;
+                default: break;
             }
         }
 
@@ -1523,20 +1692,20 @@ namespace Environment_Monitoring_System_Interface
 
             if (!(attourney == null))
                 attourney.Abort();
-            
+
             if (!(paperBoy == null))
                 paperBoy.Abort();
 
             if (!(theBritishAreComing == null))
                 theBritishAreComing.Abort();
 
-            if (!(protester  == null)) 
+            if (!(protester == null))
                 protester.Abort();
 
             if (!(hellmo == null))
                 hellmo.Abort();
 
-            if (!(whistleTemp1 == null)) 
+            if (!(whistleTemp1 == null))
                 whistleTemp1.Abort();
 
             if (!(whistleTemp2 == null))
@@ -1587,7 +1756,7 @@ namespace Environment_Monitoring_System_Interface
             if (!(whistleBat1 == null))
                 whistleBat1.Abort();
 
-            if (!(whistleBat2 == null)) 
+            if (!(whistleBat2 == null))
                 whistleBat2.Abort();
 
             if (!(whistleBat3 == null))
@@ -1647,6 +1816,37 @@ namespace Environment_Monitoring_System_Interface
         private void sensor8NameBox_TextChanged(object sender, EventArgs e)
         {
             sensor8.name = sensor8NameBox.Text;
+        }
+
+        private void label25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            s1count = 0;
+            s2count = 0;
+            s3count = 0;
+            s4count = 0;
+            s5count = 0;
+            s6count = 0;
+            s7count = 0;
+            s8count = 0;
+
+            pc1.Text = Convert.ToString(s1count);
+            pc2.Text = Convert.ToString(s2count);
+            pc3.Text = Convert.ToString(s3count);
+            pc4.Text = Convert.ToString(s4count);
+            pc5.Text = Convert.ToString(s5count);
+            pc6.Text = Convert.ToString(s6count);
+            pc7.Text = Convert.ToString(s7count);
+            pc8.Text = Convert.ToString(s8count);
         }
     }
 }

@@ -1,22 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Management;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Management;
-using System.Collections;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using System.Reflection.Emit;
-using OfficeOpenXml;
-using DocumentFormat.OpenXml.Vml;
 
 namespace Environment_Monitoring_System_Interface
 {
@@ -69,15 +56,15 @@ namespace Environment_Monitoring_System_Interface
                 serialPort1.Handshake = Handshake.None;
                 serialPort1.Encoding = System.Text.Encoding.Default;
 
-                try
-                {
-                    await Task.Run(() => serialPort1.Open());
-                    serialPort1.Write("Z");
-            
-                    var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
-                    var responseTask = ReadResponse();
+            try
+            {
+                await Task.Run(() => serialPort1.Open());
+                serialPort1.Write("Z");
 
-                    await Task.WhenAny(responseTask, timeoutTask);
+                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
+                var responseTask = ReadResponse();
+
+                await Task.WhenAny(responseTask, timeoutTask);
 
                     serialPort1.Open();
                     if(serialPort1.IsOpen) 
@@ -159,24 +146,24 @@ namespace Environment_Monitoring_System_Interface
             }
 
         }
-     
+
         private void continueButton_Click_1(object sender, EventArgs e)
         {
-          //  if (isConnectedToCU)
-         //   {
-                HomePageForm form = new HomePageForm
-                {
-                    SerialPort = serialPort1
-                };
+            //  if (isConnectedToCU)
+            //   {
+            HomePageForm form = new HomePageForm
+            {
+                SerialPort = serialPort1
+            };
 
-                stop = true;                
+            stop = true;
 
-                this.Hide();
+            this.Hide();
 
-                form.ShowDialog();
+            form.ShowDialog();
 
-                this.Close();
-       //     }
+            this.Close();
+            //     }
         }
 
         private void Form1_Load(object sender, EventArgs e)

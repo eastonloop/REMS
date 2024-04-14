@@ -60,7 +60,7 @@ namespace Environment_Monitoring_System_Interface
 
 
                 serialPort1.PortName = port;
-               // serialPort1.PortName = "COM6";
+             //   serialPort1.PortName = "COM10";
                 serialPort1.BaudRate = 9600;
                 serialPort1.DtrEnable = true;
                 serialPort1.DataBits = 8;

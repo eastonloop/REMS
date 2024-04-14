@@ -844,7 +844,7 @@ namespace Environment_Monitoring_System_Interface
             {
                 for (int i = 0; i < 24; i++)
                 {
-                    Thread.Sleep(1000*1200);
+                    Thread.Sleep(1000*5);
                     sensor1.takeAvg();
                     sensor2.takeAvg();
                     sensor3.takeAvg();
@@ -1046,11 +1046,11 @@ namespace Environment_Monitoring_System_Interface
 
                 if (language)
                 {
-                    path = @"C:\Downloads\ReporteDiario.xlsx";
+                    path = "Reporte Diario.xlsx";
                 }
                 else
                 {
-                    path = @"C:\Downloads\DailyReport.xlsx";
+                    path = "Daily Report.xlsx";
                 }
 
 
@@ -1123,7 +1123,7 @@ namespace Environment_Monitoring_System_Interface
                             package.SaveAs(stream);
                             stream.Position = 0;
                             if (!(_emailAddress == null))
-                                MailMan.SendReport(_emailAddress, language, theDate, stream);
+                                MailMan.SendReport(_emailAddress, language, theDate, stream, path);
 
                         }
 
@@ -1162,25 +1162,27 @@ namespace Environment_Monitoring_System_Interface
                 timeText = "Hour ";
             }
 
-            path = System.IO.Path.Combine(Environment.CurrentDirectory, path);
+          //  path = System.IO.Path.Combine(Environment.CurrentDirectory, path);
 
             List<Sensor> sensors = new List<Sensor>
-    {
-        sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7, sensor8
-    };
+            {
+                sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7, sensor8
+            };
 
             if (scale)
                 tempType = " °C";
             else
                 tempType = " °F";
 
-            bool fileSaved = false;
-            int retries = 3;
-            while (!fileSaved && retries > 0)
+            //   bool fileSaved = false;
+            //   int retries = 3;
+            //   while (!fileSaved && retries > 0)
+            //  {
+            using (var stream = new MemoryStream())
             {
                 try
                 {
-                    using (StreamWriter writer = new StreamWriter(path, false))
+                    using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                     {
                         writer.WriteLine(DateTime.Now.ToString());
                         writer.WriteLine('\n');
@@ -1208,10 +1210,10 @@ namespace Environment_Monitoring_System_Interface
                         {
                             if (language)
                             {
-                                writer.WriteLine("Tiempo, Temperatura, Humedad, Nivel de Bateria" + ",");
+                                writer.Write("Tiempo, Temperatura, Humedad, Nivel de Bateria" + ",");
                             }
                             else
-                                writer.WriteLine("Time, Temperature, Humidity, Battery Level" + ",");
+                                writer.Write("Time, Temperature, Humidity, Battery Level" + ",");
                         }
 
                         writer.WriteLine('\n');
@@ -1248,25 +1250,42 @@ namespace Environment_Monitoring_System_Interface
                             sensors[i].lastBat.Clear();
                             sensors[i].catchCount = 0;
                         }
-                        writer.Dispose();
-                    }
-                    fileSaved = true;
+                        //writer.Dispose();
+
+                     //   Thread.Sleep(1000);
+                    byte[] bytes = Encoding.UTF8.GetBytes(writer.ToString());
+                    stream.Write(bytes, 0, bytes.Length);
+                    stream.Seek(0, SeekOrigin.Begin);
+
+                    Thread.Sleep(1000);
+
+                    // package.SaveAs(stream);
+                    //  stream.Position = 0;
+                    if (!(_emailAddress == null))
+                        MailMan.SendReport(_emailAddress, language, theDate, stream, path);
+
+                        
+                    writer.Dispose();
+                }
+                 //   fileSaved = true;
 
                 }
                 catch (IOException)
                 {
                     // Wait for a short period before retrying
                     System.Threading.Thread.Sleep(1000); // 1 second
-                    retries--;
+            //        retries--;
                 }
             }
 
-           /* if (fileSaved && !string.IsNullOrEmpty(_emailAddress))
-            {
-                MailMan.SendReport(_emailAddress, language, theDate, path);
-                
-            }
-           */
+            /* if (fileSaved && !string.IsNullOrEmpty(_emailAddress))
+             {
+                 MailMan.SendReport(_emailAddress, language, theDate, path);
+
+             }
+            */
+
+            
         }
 
 

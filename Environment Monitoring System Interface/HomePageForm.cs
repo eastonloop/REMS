@@ -96,6 +96,16 @@ namespace Environment_Monitoring_System_Interface
         Sensor sensor7 = new Sensor(7);
         Sensor sensor8 = new Sensor(8);
 
+        int s1count = 0;
+        int s2count = 0;
+        int s3count = 0;
+        int s4count = 0;
+        int s5count = 0;
+        int s6count = 0;
+        int s7count = 0;
+        int s8count = 0;
+
+
 
         public int count = 1;
        
@@ -187,6 +197,13 @@ namespace Environment_Monitoring_System_Interface
             switch (whichSens)
             {
                 case 1:
+                    s1count++;
+
+                    pc1.Invoke((MethodInvoker)delegate
+                    {
+                        pc1.Text = Convert.ToString(s1count);
+                    });
+
                     sensor1.addData(transmitData, scale);
 
                     temp1Box.Invoke((MethodInvoker)delegate
@@ -269,6 +286,14 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 2:
+
+                    s2count++;
+
+                    pc2.Invoke((MethodInvoker)delegate
+                    {
+                        pc2.Text = Convert.ToString(s2count);
+                    });
+
                     sensor2.addData(transmitData, scale);
 
                     temp2Box.Invoke((MethodInvoker)delegate
@@ -360,6 +385,14 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 3:
+
+                    s3count++;
+
+                    pc3.Invoke((MethodInvoker)delegate
+                    {
+                        pc3.Text = Convert.ToString(s3count);
+                    });
+
                     sensor3.addData(transmitData, scale);
 
                     temp3Box.Invoke((MethodInvoker)delegate
@@ -442,6 +475,13 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 4:
+                    s4count++;
+
+                    pc4.Invoke((MethodInvoker)delegate
+                    {
+                        pc4.Text = Convert.ToString(s4count);
+                    });
+
                     sensor4.addData(transmitData, scale);
 
                     temp4Box.Invoke((MethodInvoker)delegate
@@ -525,6 +565,13 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 5:
+                    s5count++;
+
+                    pc5.Invoke((MethodInvoker)delegate
+                    {
+                        pc5.Text = Convert.ToString(s5count);
+                    });
+
                     sensor5.addData(transmitData, scale);
 
                     temp5Box.Invoke((MethodInvoker)delegate
@@ -608,6 +655,13 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 6:
+                    s6count++;
+
+                    pc6.Invoke((MethodInvoker)delegate
+                    {
+                        pc6.Text = Convert.ToString(s6count);
+                    });
+
                     sensor6.addData(transmitData, scale);
 
                     temp6Box.Invoke((MethodInvoker)delegate
@@ -691,6 +745,13 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 7:
+                    s7count++;
+
+                    pc7.Invoke((MethodInvoker)delegate
+                    {
+                        pc7.Text = Convert.ToString(s7count);
+                    });
+
                     sensor7.addData(transmitData, scale);
 
                     temp7Box.Invoke((MethodInvoker)delegate
@@ -774,6 +835,13 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 8:
+                    s8count++;
+
+                    pc8.Invoke((MethodInvoker)delegate
+                    {
+                        pc8.Text = Convert.ToString(s8count);
+                    });
+
                     sensor8.addData(transmitData, scale);
 
                     temp8Box.Invoke((MethodInvoker)delegate
@@ -1729,6 +1797,37 @@ namespace Environment_Monitoring_System_Interface
         private void sensor8NameBox_TextChanged(object sender, EventArgs e)
         {
             sensor8.name = sensor8NameBox.Text;
+        }
+
+        private void label25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            s1count = 0;
+            s2count = 0;
+            s3count = 0;
+            s4count = 0;
+            s5count = 0;
+            s6count = 0;
+            s7count = 0;
+            s8count = 0;
+
+            pc1.Text = Convert.ToString(s1count);
+            pc2.Text = Convert.ToString(s2count);
+            pc3.Text = Convert.ToString(s3count);
+            pc4.Text = Convert.ToString(s4count);
+            pc5.Text = Convert.ToString(s5count);
+            pc6.Text = Convert.ToString(s6count);
+            pc7.Text = Convert.ToString(s7count);
+            pc8.Text = Convert.ToString(s8count);
         }
     }
 }

@@ -77,7 +77,7 @@ namespace Environment_Monitoring_System_Interface
 
         private bool settingsExist = false;
         SettingsPageForm newGuy;
-        public bool waitToSet;
+       // public bool waitToSet;
 
         public SerialPort SerialPort
         {
@@ -147,12 +147,19 @@ namespace Environment_Monitoring_System_Interface
 
         public string tempType;
         public string batText;
-        public bool noAlert;
+        public bool noAlert = true;
+        public bool yesNo = false;
 
         public bool noAlertType
         {
             get { return noAlert; }
             set { noAlert = value; }
+        }
+
+        public bool yesNoType
+        {
+            get { return yesNo; }
+            set { yesNo = value; }
         }
 
         private System.Threading.Timer sequenceTime;
@@ -974,7 +981,7 @@ namespace Environment_Monitoring_System_Interface
                 newGuy.sensor6 = sensor6;
                 newGuy.sensor7 = sensor7;
                 newGuy.sensor8 = sensor8;
-                newGuy.waitToSet = waitToSet;
+              //  newGuy.waitToSet = waitToSet;
 
                 newGuy.ShowDialog();
             }
@@ -1001,7 +1008,7 @@ namespace Environment_Monitoring_System_Interface
 
           //  newGuy = null;
 
-            if (!(_emailAddress == null) && !(attourney.IsAlive))
+            if (!(_emailAddress == null) && !(attourney.IsAlive) && yesNo)
             {
                 attourney.Start();
             }
@@ -1009,11 +1016,11 @@ namespace Environment_Monitoring_System_Interface
         }        
         public void dailyReport()
         {
-            while (true)
+            while (yesNo)
             {
                 for (int i = 0; i < 24; i++)
                 {
-                    Thread.Sleep(1000*5);
+                    Thread.Sleep(1000 * 60 * 60);
                     sensor1.takeAvg();
                     sensor2.takeAvg();
                     sensor3.takeAvg();
@@ -1351,7 +1358,7 @@ namespace Environment_Monitoring_System_Interface
             {
                 try
                 {
-                    using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(stream, System.Text.Encoding.UTF8))
                     {
                         writer.WriteLine(DateTime.Now.ToString());
                         writer.WriteLine('\n');
@@ -1422,7 +1429,7 @@ namespace Environment_Monitoring_System_Interface
                         //writer.Dispose();
 
                      //   Thread.Sleep(1000);
-                    byte[] bytes = Encoding.UTF8.GetBytes(writer.ToString());
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(writer.ToString());
                     stream.Write(bytes, 0, bytes.Length);
                     stream.Seek(0, SeekOrigin.Begin);
 
@@ -1621,7 +1628,7 @@ namespace Environment_Monitoring_System_Interface
                 while (culprit.bat < 2.42 && culprit.bat > 1 && !(_emailAddress == null))
                 {
                     MailMan.SendBat(_emailAddress, language, culprit);
-                    Thread.Sleep(1000 * 60 * freq);
+                    Thread.Sleep(1000 * 60 * 60 * freq);
                 }
             }
 
@@ -1670,7 +1677,7 @@ namespace Environment_Monitoring_System_Interface
                        while (culprit.breachHum  && !(_emailAddress == null))
                        {
                            MailMan.SendAlert(_emailAddress, language, culprit, quantity, culprit.inequality);
-                           Thread.Sleep(1000 * 60 * freq);
+                           Thread.Sleep(1000 * 60 * 60 * freq);
                        }
                    }
                    else if (!quantity && !noAlert)
@@ -1678,7 +1685,7 @@ namespace Environment_Monitoring_System_Interface
                        while (culprit.breachTemp && !(_emailAddress == null))
                        {
                            MailMan.SendAlert(_emailAddress, language, culprit, quantity, culprit.inequality);
-                           Thread.Sleep(1000 * 60 * freq);
+                           Thread.Sleep(1000 * 60 * 60 * freq);
                        }
                    }
 

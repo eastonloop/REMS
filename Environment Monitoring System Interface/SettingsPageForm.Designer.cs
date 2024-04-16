@@ -61,6 +61,7 @@
             this.yesButton = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.noButton = new System.Windows.Forms.RadioButton();
+            this.clearButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -284,7 +285,7 @@
             // 
             this.submitButton.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitButton.Location = new System.Drawing.Point(688, 418);
+            this.submitButton.Location = new System.Drawing.Point(688, 398);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(134, 54);
             this.submitButton.TabIndex = 17;
@@ -359,7 +360,8 @@
             "2 hrs",
             "4 hrs",
             "6 hrs",
-            "12 hrs"});
+            "12 hrs",
+            "No Alerts"});
             this.frequencyBox.Location = new System.Drawing.Point(134, 427);
             this.frequencyBox.Name = "frequencyBox";
             this.frequencyBox.Size = new System.Drawing.Size(141, 37);
@@ -441,6 +443,7 @@
             this.yesButton.TabStop = true;
             this.yesButton.Text = "Yes";
             this.yesButton.UseVisualStyleBackColor = true;
+            this.yesButton.CheckedChanged += new System.EventHandler(this.yesButton_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -463,12 +466,25 @@
             this.noButton.TabStop = true;
             this.noButton.Text = "No";
             this.noButton.UseVisualStyleBackColor = true;
+            this.noButton.CheckedChanged += new System.EventHandler(this.noButton_CheckedChanged);
+            // 
+            // clearButton
+            // 
+            this.clearButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.clearButton.Location = new System.Drawing.Point(705, 463);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(101, 41);
+            this.clearButton.TabIndex = 32;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // SettingsPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 523);
+            this.ClientSize = new System.Drawing.Size(972, 541);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.dailyEmailLabel);
             this.Controls.Add(this.fileBox);
@@ -492,6 +508,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SettingsPageForm";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.SettingsPageForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -538,5 +555,6 @@
         private System.Windows.Forms.RadioButton yesButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton noButton;
+        private System.Windows.Forms.Button clearButton;
     }
 }

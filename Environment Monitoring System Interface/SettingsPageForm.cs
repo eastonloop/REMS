@@ -5,8 +5,6 @@ namespace Environment_Monitoring_System_Interface
 {
     public partial class SettingsPageForm : Form
     {
-        //public bool language = false;
-        //public bool scale = false;
         double minValue;
         double maxValue;
         double maxMax = 85;
@@ -14,12 +12,7 @@ namespace Environment_Monitoring_System_Interface
         
         int selectSens = 10;
         bool tempHum = false;
-        //file = false;
-        //public int freq;
-        //public string emailAddress;
-        //public bool noAlert = true;
-      //  public bool waitToSet;
-
+       
         public Sensor sensor1 { get; set; }
         public Sensor sensor2 { get; set; }
         public Sensor sensor3 { get; set; }
@@ -31,8 +24,6 @@ namespace Environment_Monitoring_System_Interface
 
         private HomePageForm form;
 
-        //public string emailAddress { get; set; }
- 
         public SettingsPageForm(HomePageForm HomePageForm)
         {
             InitializeComponent();
@@ -45,9 +36,7 @@ namespace Environment_Monitoring_System_Interface
             else
             {
                 fileBox.SelectedIndex = 0;
-
             }
-
         }
 
         private void languageBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,64 +198,48 @@ namespace Environment_Monitoring_System_Interface
         private void sensor1Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 1;
-            //minBox.Text = string.Empty;
-           // maxBox.Text = string.Empty;
             getTempThresh(sensor1, tempHum);
         }
 
         private void sensor2Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 2;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor2, tempHum);
         }
 
         private void sensor3Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 3;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor3, tempHum);
         }
 
         private void sensor4Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 4;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor4, tempHum);
         }
 
         private void sensor5Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 5;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor5, tempHum);
         }
 
         private void sensor6Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 6;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor6, tempHum);
         }
 
         private void sensor7Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 7;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor7, tempHum);
         }
 
         private void sensor8Button_CheckedChanged(object sender, EventArgs e)
         {
             selectSens = 8;
-            //minBox.Text = string.Empty;
-            //maxBox.Text = string.Empty;
             getTempThresh(sensor8, tempHum);
         }
 
@@ -274,21 +247,18 @@ namespace Environment_Monitoring_System_Interface
         {
             tempHum = false;
 
-            //if no sensor selected, display blank, else grab whatever is stored in each sensor
-     
-                switch (selectSens)
-                {
-                    case 1: getTempThresh(sensor1, tempHum); break;
-                    case 2: getTempThresh(sensor2, tempHum); break;
-                    case 3: getTempThresh(sensor3, tempHum); break;
-                    case 4: getTempThresh(sensor4, tempHum); break;
-                    case 5: getTempThresh(sensor5, tempHum); break;
-                    case 6: getTempThresh(sensor6, tempHum); break;
-                    case 7: getTempThresh(sensor7, tempHum); break;
-                    case 8: getTempThresh(sensor8, tempHum); break;
-                    default: break;
-                }
-    
+            switch (selectSens)
+            {
+                case 1: getTempThresh(sensor1, tempHum); break;
+                case 2: getTempThresh(sensor2, tempHum); break;
+                case 3: getTempThresh(sensor3, tempHum); break;
+                case 4: getTempThresh(sensor4, tempHum); break;
+                case 5: getTempThresh(sensor5, tempHum); break;
+                case 6: getTempThresh(sensor6, tempHum); break;
+                case 7: getTempThresh(sensor7, tempHum); break;
+                case 8: getTempThresh(sensor8, tempHum); break;
+                default: break;
+            }   
 
             if (form.scaleType)
             {
@@ -306,8 +276,6 @@ namespace Environment_Monitoring_System_Interface
         {
             tempHum = true;
 
-            //if no sensor selected, display blank, else grab values from each sensor 
-
             switch(selectSens)
             {
                 case 1: getTempThresh(sensor1,tempHum); break;
@@ -321,7 +289,6 @@ namespace Environment_Monitoring_System_Interface
                 default: break;
             }
             
-
             minTypeLabel.Text = "%";
             maxTypeLabel.Text = "%";
         }
@@ -374,10 +341,7 @@ namespace Environment_Monitoring_System_Interface
 
         private void settingsPageForm_Closing(object sender, FormClosedEventArgs e)
         {
-    //        waitToSet = false;
-
             this.Visible = false;
-          
         }
         private void getTempThresh(Sensor sensor, bool tempHum )
         {
@@ -396,17 +360,6 @@ namespace Environment_Monitoring_System_Interface
                 minBox.Text = string.Empty;
                 maxBox.Text = string.Empty;
             }
-
-        }
-
-        private void minBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void SettingsPageForm_Load(object sender, EventArgs e)

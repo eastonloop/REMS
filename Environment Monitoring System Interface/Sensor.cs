@@ -30,8 +30,6 @@ namespace Environment_Monitoring_System_Interface
         public bool breachHum = false;
         public bool standbyTemp = true;
         public bool standbyHum = true;
-        public int sendCount = 0;
-        public int catchCount = 0;
 
         public Sensor(int i)
         {
@@ -51,7 +49,6 @@ namespace Environment_Monitoring_System_Interface
             holdHum = Convert.ToDouble(transmitData[2]) / 100;
             bat = Convert.ToDouble(transmitData[3]) / 100;
             esm = Convert.ToInt16(transmitData[4]);
-            sendCount = Convert.ToInt16(transmitData[5]);
             tempScale = scale;
 
             if (scale)
@@ -61,7 +58,6 @@ namespace Environment_Monitoring_System_Interface
 
             temps.Add(holdTemp);
             hums.Add(holdHum);
-            catchCount++;
         }
 
         public void setThresh(double min, double max, bool which)
@@ -125,7 +121,6 @@ namespace Environment_Monitoring_System_Interface
             }
 
             dayHum = humAvg.Average(x => x);
-
             return dayHum;
         }
 

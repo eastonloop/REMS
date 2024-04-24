@@ -77,7 +77,6 @@ namespace Environment_Monitoring_System_Interface
 
         private bool settingsExist = false;
         SettingsPageForm newGuy;
-       // public bool waitToSet;
 
         public SerialPort SerialPort
         {
@@ -95,17 +94,6 @@ namespace Environment_Monitoring_System_Interface
         Sensor sensor6 = new Sensor(6);
         Sensor sensor7 = new Sensor(7);
         Sensor sensor8 = new Sensor(8);
-
-        int s1count = 0;
-        int s2count = 0;
-        int s3count = 0;
-        int s4count = 0;
-        int s5count = 0;
-        int s6count = 0;
-        int s7count = 0;
-        int s8count = 0;
-
-
 
         public int count = 1;
        
@@ -197,20 +185,11 @@ namespace Environment_Monitoring_System_Interface
             transmitData = message.Split(':');
 
             whichSens = Convert.ToInt16(transmitData[0]);
-            string messagesDelivered = transmitData[5];
-            string attempts = transmitData[6];
-            string totalRetries = transmitData[7];
-
+           
             switch (whichSens)
             {
                 case 1:
-                    s1count++;
-
-                    pc1.Invoke((MethodInvoker)delegate
-                    {
-                        pc1.Text = Convert.ToString(s1count);
-                    });
-
+                    
                     sensor1.addData(transmitData, scale);
 
                     temp1Box.Invoke((MethodInvoker)delegate
@@ -241,19 +220,7 @@ namespace Environment_Monitoring_System_Interface
                             bat1Label.BackColor = sensorFeedLabel.BackColor;
                         }
                     });
-                    label1.Invoke((MethodInvoker)delegate
-                    {
-                        label1.Text = messagesDelivered;
-                    });
-                    label2.Invoke((MethodInvoker)delegate
-                    {
-                        label2.Text = attempts;
-                    });
-                    label3.Invoke((MethodInvoker)delegate
-                    {
-                        label3.Text = totalRetries;
-                    });
-
+                    
                     sensor1Label.BackColor = sensorFeedLabel.BackColor;
                     Thread.Sleep(500);
 
@@ -294,13 +261,6 @@ namespace Environment_Monitoring_System_Interface
                     break;
                 case 2:
 
-                    s2count++;
-
-                    pc2.Invoke((MethodInvoker)delegate
-                    {
-                        pc2.Text = Convert.ToString(s2count);
-                    });
-
                     sensor2.addData(transmitData, scale);
 
                     temp2Box.Invoke((MethodInvoker)delegate
@@ -311,19 +271,6 @@ namespace Environment_Monitoring_System_Interface
                     hum2Box.Invoke((MethodInvoker)delegate
                     {
                         hum2Box.Text = Convert.ToString(Math.Round(sensor2.holdHum));
-                    });
-
-                    label4.Invoke((MethodInvoker)delegate
-                    {
-                        label4.Text = messagesDelivered;
-                    });
-                    label5.Invoke((MethodInvoker)delegate
-                    {
-                        label5.Text = attempts;
-                    });
-                    label6.Invoke((MethodInvoker)delegate
-                    {
-                        label6.Text = totalRetries;
                     });
 
                     bat2Label.Invoke((MethodInvoker)delegate
@@ -345,11 +292,6 @@ namespace Environment_Monitoring_System_Interface
                         }
                     });
 
-                    /*      if (sensor2.esm == 1)
-                              sensor2Label.BackColor = System.Drawing.Color.CornflowerBlue;
-                          else if (sensor2.esm == 0)
-                              sensor2Label.BackColor = System.Drawing.Color.Gold;
-                    */
                     sensor2Label.BackColor = sensorFeedLabel.BackColor;
                     Thread.Sleep(500);
 
@@ -393,13 +335,6 @@ namespace Environment_Monitoring_System_Interface
                     break;
                 case 3:
 
-                    s3count++;
-
-                    pc3.Invoke((MethodInvoker)delegate
-                    {
-                        pc3.Text = Convert.ToString(s3count);
-                    });
-
                     sensor3.addData(transmitData, scale);
 
                     temp3Box.Invoke((MethodInvoker)delegate
@@ -411,19 +346,7 @@ namespace Environment_Monitoring_System_Interface
                     {
                         hum3Box.Text = Convert.ToString(Math.Round(sensor3.holdHum));
                     });
-                    label7.Invoke((MethodInvoker)delegate
-                    {
-                        label7.Text = messagesDelivered;
-                    });
-                    label8.Invoke((MethodInvoker)delegate
-                    {
-                        label8.Text = attempts;
-                    });
-                    label9.Invoke((MethodInvoker)delegate
-                    {
-                        label9.Text = totalRetries;
-                    });
-
+                    
                     bat3Label.Invoke((MethodInvoker)delegate
                     {
                         if (sensor3.bat < 2.42 && sensor3.bat > 1 && language)
@@ -482,13 +405,7 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 4:
-                    s4count++;
-
-                    pc4.Invoke((MethodInvoker)delegate
-                    {
-                        pc4.Text = Convert.ToString(s4count);
-                    });
-
+                    
                     sensor4.addData(transmitData, scale);
 
                     temp4Box.Invoke((MethodInvoker)delegate
@@ -499,19 +416,6 @@ namespace Environment_Monitoring_System_Interface
                     hum4Box.Invoke((MethodInvoker)delegate
                     {
                         hum4Box.Text = Convert.ToString(Math.Round(sensor4.holdHum));
-                    });
-
-                    label10.Invoke((MethodInvoker)delegate
-                    {
-                        label10.Text = messagesDelivered;
-                    });
-                    label11.Invoke((MethodInvoker)delegate
-                    {
-                        label11.Text = attempts;
-                    });
-                    label12.Invoke((MethodInvoker)delegate
-                    {
-                        label12.Text = totalRetries;
                     });
 
                     bat4Label.Invoke((MethodInvoker)delegate
@@ -572,13 +476,7 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 5:
-                    s5count++;
-
-                    pc5.Invoke((MethodInvoker)delegate
-                    {
-                        pc5.Text = Convert.ToString(s5count);
-                    });
-
+                    
                     sensor5.addData(transmitData, scale);
 
                     temp5Box.Invoke((MethodInvoker)delegate
@@ -589,19 +487,6 @@ namespace Environment_Monitoring_System_Interface
                     hum5Box.Invoke((MethodInvoker)delegate
                     {
                         hum5Box.Text = Convert.ToString(Math.Round(sensor5.holdHum));
-                    });
-
-                    label13.Invoke((MethodInvoker)delegate
-                    {
-                        label13.Text = messagesDelivered;
-                    });
-                    label14.Invoke((MethodInvoker)delegate
-                    {
-                        label14.Text = attempts;
-                    });
-                    label15.Invoke((MethodInvoker)delegate
-                    {
-                        label15.Text = totalRetries;
                     });
 
                     bat5Label.Invoke((MethodInvoker)delegate
@@ -662,13 +547,7 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 6:
-                    s6count++;
-
-                    pc6.Invoke((MethodInvoker)delegate
-                    {
-                        pc6.Text = Convert.ToString(s6count);
-                    });
-
+                    
                     sensor6.addData(transmitData, scale);
 
                     temp6Box.Invoke((MethodInvoker)delegate
@@ -679,19 +558,6 @@ namespace Environment_Monitoring_System_Interface
                     hum6Box.Invoke((MethodInvoker)delegate
                     {
                         hum6Box.Text = Convert.ToString(Math.Round(sensor6.holdHum));
-                    });
-
-                    label16.Invoke((MethodInvoker)delegate
-                    {
-                        label16.Text = messagesDelivered;
-                    });
-                    label17.Invoke((MethodInvoker)delegate
-                    {
-                        label17.Text = attempts;
-                    });
-                    label18.Invoke((MethodInvoker)delegate
-                    {
-                        label18.Text = totalRetries;
                     });
 
                     bat6Label.Invoke((MethodInvoker)delegate
@@ -752,13 +618,7 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 7:
-                    s7count++;
-
-                    pc7.Invoke((MethodInvoker)delegate
-                    {
-                        pc7.Text = Convert.ToString(s7count);
-                    });
-
+                    
                     sensor7.addData(transmitData, scale);
 
                     temp7Box.Invoke((MethodInvoker)delegate
@@ -769,19 +629,6 @@ namespace Environment_Monitoring_System_Interface
                     hum7Box.Invoke((MethodInvoker)delegate
                     {
                         hum7Box.Text = Convert.ToString(Math.Round(sensor7.holdHum));
-                    });
-
-                    label19.Invoke((MethodInvoker)delegate
-                    {
-                        label19.Text = messagesDelivered;
-                    });
-                    label20.Invoke((MethodInvoker)delegate
-                    {
-                        label20.Text = attempts;
-                    });
-                    label21.Invoke((MethodInvoker)delegate
-                    {
-                        label21.Text = totalRetries;
                     });
 
                     bat7Label.Invoke((MethodInvoker)delegate
@@ -842,13 +689,7 @@ namespace Environment_Monitoring_System_Interface
 
                     break;
                 case 8:
-                    s8count++;
-
-                    pc8.Invoke((MethodInvoker)delegate
-                    {
-                        pc8.Text = Convert.ToString(s8count);
-                    });
-
+                    
                     sensor8.addData(transmitData, scale);
 
                     temp8Box.Invoke((MethodInvoker)delegate
@@ -860,19 +701,6 @@ namespace Environment_Monitoring_System_Interface
                     {
                         hum8Box.Text = Convert.ToString(Math.Round(sensor8.holdHum));
                     });
-
-                    label22.Invoke((MethodInvoker)delegate
-                    {
-                        label22.Text = messagesDelivered;
-                    });
-                    label23.Invoke((MethodInvoker)delegate
-                    {
-                        label23.Text = attempts;
-                    });
-                    label24.Invoke((MethodInvoker)delegate
-                    {
-                        label24.Text = totalRetries;
-                    }); 
 
                     bat8Label.Invoke((MethodInvoker)delegate
                     {
@@ -954,7 +782,6 @@ namespace Environment_Monitoring_System_Interface
             sensors.Add(sensor6);
             sensors.Add(sensor7);
             sensors.Add(sensor8);
-        //    _emailAddress = "wwpool@mc.edu";
         }
 
         private void HomePageForm_Load(object sender, EventArgs e)
@@ -981,33 +808,16 @@ namespace Environment_Monitoring_System_Interface
                 newGuy.sensor6 = sensor6;
                 newGuy.sensor7 = sensor7;
                 newGuy.sensor8 = sensor8;
-              //  newGuy.waitToSet = waitToSet;
-
                 newGuy.ShowDialog();
             }
             else
                 newGuy.Visible = true;
 
-           // waitToSet = true;
-
             this.Show();
 
-           // if (!waitToSet)
-           // {
-               // scale = newGuy.scale;
-               // language = newGuy.language;
-               // file = newGuy.file;
-               // freq = newGuy.freq;
-               // emailAddress = newGuy.emailAddress;
-               // noAlert = newGuy.noAlert;
-           // }
-            
             if (attourney == null)
                 attourney = new Thread(dailyReport);
       
-
-          //  newGuy = null;
-
             if (!(_emailAddress == null) && !(attourney.IsAlive) && yesNo)
             {
                 attourney.Start();
@@ -1075,102 +885,9 @@ namespace Environment_Monitoring_System_Interface
                 tempDay.Clear();
                 humDay.Clear();
                 batDay.Clear();
-
-                /*
-                if (attourney.IsAlive)
-                {
-                    attourney.Abort();
-                }
-                else
-                {
-                    lawyer.Abort();
-                }
-                */
             }
-            
-
         }
             
-        
-
-        /*
-        public void minuteTaker()
-        {
-            paperBoy = new Thread(dailyReport);
-            paperBoy.Start();
-            while (!(this.IsDisposed))
-            {
-                Thread.Sleep(1000);
-                sensor1.takeAvg();
-                sensor2.takeAvg();
-                sensor3.takeAvg();
-                sensor4.takeAvg();
-                sensor5.takeAvg();
-                sensor6.takeAvg();
-                sensor7.takeAvg();
-                sensor8.takeAvg();
-            }
-        }
-
-        private void dailyReport()
-        {
-            while (!(IsDisposed))
-            {
-                Thread.Sleep(1000 * 24);
-
-                for (int i = 0; i < 8; i++)
-                {
-                    tempDay.Add(0);
-                    humDay.Add(0);
-                    batDay.Add(0);
-                }
-
-                tempDay[0] = Math.Round(100 * sensor1.dailyTempAvg()) / 100;
-                tempDay[1] = Math.Round(100 * sensor2.dailyTempAvg()) / 100;
-                tempDay[2] = Math.Round(100 * sensor3.dailyTempAvg()) / 100;
-                tempDay[3] = Math.Round(100 * sensor4.dailyTempAvg()) / 100;
-                tempDay[4] = Math.Round(100 * sensor5.dailyTempAvg()) / 100;
-                tempDay[5] = Math.Round(100 * sensor6.dailyTempAvg()) / 100;
-                tempDay[6] = Math.Round(100 * sensor7.dailyTempAvg()) / 100;
-                tempDay[7] = Math.Round(100 * sensor8.dailyTempAvg()) / 100;
-
-                humDay[0] = Math.Round(100 * sensor1.dailyHumAvg()) / 100;
-                humDay[1] = Math.Round(100 * sensor2.dailyHumAvg()) / 100;
-                humDay[2] = Math.Round(100 * sensor3.dailyHumAvg()) / 100;
-                humDay[3] = Math.Round(100 * sensor4.dailyHumAvg()) / 100;
-                humDay[4] = Math.Round(100 * sensor5.dailyHumAvg()) / 100;
-                humDay[5] = Math.Round(100 * sensor6.dailyHumAvg()) / 100;
-                humDay[6] = Math.Round(100 * sensor7.dailyHumAvg()) / 100;
-                humDay[7] = Math.Round(100 * sensor8.dailyHumAvg()) / 100;
-
-                batDay[0] = sensor1.bat;
-                batDay[1] = sensor2.bat;
-                batDay[2] = sensor3.bat;
-                batDay[3] = sensor4.bat;
-                batDay[4] = sensor5.bat;
-                batDay[5] = sensor6.bat;
-                batDay[6] = sensor7.bat;
-                batDay[7] = sensor8.bat;
-
-                if (file)
-                    excelOut();
-                else
-                    csvOut();
-
-                tempDay.Clear();
-                humDay.Clear();
-                batDay.Clear();
-
-                lawyer = new Thread(minuteTaker);
-                lawyer.Start();
-                attourney.Abort();
-                paperBoy.Abort();
-
-         
-            }
-           
-        }
-        */
         private void updateElements()
         {
             if (scale)
@@ -1229,94 +946,76 @@ namespace Environment_Monitoring_System_Interface
                     path = "Daily Report.xlsx";
                 }
 
+                using (ExcelPackage package = new ExcelPackage())
+                {
 
-                    using (ExcelPackage package = new ExcelPackage())
+                    theDate = DateTime.Today.ToString().Split(' ')[0];
+
+                    if (language)
+                        report = package.Workbook.Worksheets.Add("Reportante");
+                    else
+                        report = package.Workbook.Worksheets.Add("Report");
+
+                    if (scale)
+                        tempType = " °C";
+                    else
+                        tempType = " °F";
+
+                    report.Cells[1, 1].Value = theDate;
+
+                    for (int i = 0; i < 8; i++)
                     {
-
-                        theDate = DateTime.Today.ToString().Split(' ')[0];
+                        report.Cells[2, i * 3 + 3].Value = "Sensor " + (i + 1);
 
                         if (language)
-                            report = package.Workbook.Worksheets.Add("Reportante");
+                        {
+                            report.Name = "REMS Reporte Diario- " + theDate;
+                            report.Cells[3, i * 3 + 2].Value = "Temperatura Media";
+                            report.Cells[3, i * 3 + 3].Value = "Humedad Promedio";
+                            report.Cells[3, i * 3 + 4].Value = "Último Nivel de Batería";
+                            batText = " Voltios";
+                            report.Cells[30, 1].Value = "Acumulativo";
+                        }
                         else
-                            report = package.Workbook.Worksheets.Add("Report");
-
-                        if (scale)
-                            tempType = " °C";
-                        else
-                            tempType = " °F";
-
-                        report.Cells[1, 1].Value = theDate;
-
-                        for (int i = 0; i < 8; i++)
                         {
-                            report.Cells[2, i * 3 + 3].Value = "Sensor " + (i + 1);
-
-                            if (language)
-                            {
-                                report.Name = "REMS Reporte Diario- " + theDate;
-                                report.Cells[3, i * 3 + 2].Value = "Temperatura Media";
-                                report.Cells[3, i * 3 + 3].Value = "Humedad Promedio";
-                                report.Cells[3, i * 3 + 4].Value = "Último Nivel de Batería";
-                                batText = " Voltios";
-                                report.Cells[30, 1].Value = "Acumulativo";
-                            }
-                            else
-                            {
-                                report.Name = "REMS Daily Report- " + theDate;
-                                report.Cells[3, i * 3 + 2].Value = "Average Temperature";
-                                report.Cells[3, i * 3 + 3].Value = "Average Humidity";
-                                report.Cells[3, i * 3 + 4].Value = "Latest Battery Level";
-                                batText = " Volts";
-                                report.Cells[30, 1].Value = "Cumulative";
-                            }
+                            report.Name = "REMS Daily Report- " + theDate;
+                            report.Cells[3, i * 3 + 2].Value = "Average Temperature";
+                            report.Cells[3, i * 3 + 3].Value = "Average Humidity";
+                            report.Cells[3, i * 3 + 4].Value = "Latest Battery Level";
+                            batText = " Volts";
+                            report.Cells[30, 1].Value = "Cumulative";
                         }
-
-                        for (int i = 1; i < 9; i++)
-                        {
-                            Sensor americanPeople = sensors[i - 1];
-
-                            report.Cells[2, i * 3 - 1].Value = "CPU: " + americanPeople.sendCount;
-                            report.Cells[2, i * 3 + 1].Value = "GUI: " + americanPeople.catchCount;
-
-                            for (int j = 4; j < 28; j++)
-                            {
-                                report.Cells[j, i * 3 - 1].Value = americanPeople.tempAvg[j - 4] + tempType;
-                                report.Cells[j, i * 3].Value = americanPeople.humAvg[j - 4] + " %";
-                                report.Cells[j, i * 3 + 1].Value = americanPeople.lastBat[j - 4] + batText;
-                            }
-
-                            report.Cells[30, i * 3 - 1].Value = tempDay[i - 1] + tempType;
-                            report.Cells[30, i * 3].Value = humDay[i - 1] + " %";
-                            report.Cells[30, i * 3 + 1].Value = batDay[i - 1] + batText;
-
-                            americanPeople.tempAvg.Clear();
-                            americanPeople.humAvg.Clear();
-                            americanPeople.lastBat.Clear();
-                            americanPeople.catchCount = 0;
-                        }
-                        using (var stream = new MemoryStream())
-                        {
-                            package.SaveAs(stream);
-                            stream.Position = 0;
-                            if (!(_emailAddress == null))
-                                MailMan.SendReport(_emailAddress, language, theDate, stream, path);
-
-                        }
-
-
-
-                        //package.Save();
-                     
                     }
 
-                
-               
-                    
+                    for (int i = 1; i < 9; i++)
+                    {
+                        Sensor americanPeople = sensors[i - 1];
+
+                        for (int j = 4; j < 28; j++)
+                        {
+                            report.Cells[j, i * 3 - 1].Value = americanPeople.tempAvg[j - 4] + tempType;
+                            report.Cells[j, i * 3].Value = americanPeople.humAvg[j - 4] + " %";
+                            report.Cells[j, i * 3 + 1].Value = americanPeople.lastBat[j - 4] + batText;
+                        }
+
+                        report.Cells[30, i * 3 - 1].Value = tempDay[i - 1] + tempType;
+                        report.Cells[30, i * 3].Value = humDay[i - 1] + " %";
+                        report.Cells[30, i * 3 + 1].Value = batDay[i - 1] + batText;
+
+                        americanPeople.tempAvg.Clear();
+                        americanPeople.humAvg.Clear();
+                        americanPeople.lastBat.Clear();
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        package.SaveAs(stream);
+                        stream.Position = 0;
+                        if (!(_emailAddress == null))
+                            MailMan.SendReport(_emailAddress, language, theDate, stream, path);
+                    }
+                }
             }
 
-                // Dispose of the ExcelPackage before deleting the file
-               
-            
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1338,8 +1037,6 @@ namespace Environment_Monitoring_System_Interface
                 timeText = "Hour ";
             }
 
-          //  path = System.IO.Path.Combine(Environment.CurrentDirectory, path);
-
             List<Sensor> sensors = new List<Sensor>
             {
                 sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, sensor7, sensor8
@@ -1350,10 +1047,6 @@ namespace Environment_Monitoring_System_Interface
             else
                 tempType = " °F";
 
-            //   bool fileSaved = false;
-            //   int retries = 3;
-            //   while (!fileSaved && retries > 0)
-            //  {
             using (var stream = new MemoryStream())
             {
                 try
@@ -1396,7 +1089,7 @@ namespace Environment_Monitoring_System_Interface
 
                         for (int i = 0; i < sensors[0].tempAvg.Count; i++)
                         {
-                            writer.Write(timeText + (i + 1).ToString() + ",");
+                            writer.Write(timeText + (i + 1) + ",");
 
                             for (int j = 0; j < sensors.Count; j++)
                             {
@@ -1404,7 +1097,7 @@ namespace Environment_Monitoring_System_Interface
                                 + " %" + "," + sensors[j].lastBat[i] + batText + ",");
                             }
 
-                            writer.WriteLine("\n");
+                            writer.Write("\n");
                         }
 
                         if (language)
@@ -1424,46 +1117,28 @@ namespace Environment_Monitoring_System_Interface
                             sensors[i].tempAvg.Clear();
                             sensors[i].humAvg.Clear();
                             sensors[i].lastBat.Clear();
-                            sensors[i].catchCount = 0;
                         }
-                        //writer.Dispose();
 
-                     //   Thread.Sleep(1000);
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(writer.ToString());
-                    stream.Write(bytes, 0, bytes.Length);
-                    stream.Seek(0, SeekOrigin.Begin);
+                        writer.Flush();
+                        byte[] bytes = new byte[stream.Position];
 
-                    Thread.Sleep(1000);
+                        stream.Write(bytes, 0, bytes.Length);
+                        stream.Seek(0, SeekOrigin.Begin);
 
-                    // package.SaveAs(stream);
-                    //  stream.Position = 0;
-                    if (!(_emailAddress == null))
-                        MailMan.SendReport(_emailAddress, language, theDate, stream, path);
+                        Thread.Sleep(1000);
 
+                        if (!(_emailAddress == null))
+                            MailMan.SendReport(_emailAddress, language, theDate, stream, path);
                         
-                    writer.Dispose();
-                }
-                 //   fileSaved = true;
-
+                        writer.Dispose();
+                    }
                 }
                 catch (IOException)
                 {
-                    // Wait for a short period before retrying
-                    System.Threading.Thread.Sleep(1000); // 1 second
-            //        retries--;
+                    System.Threading.Thread.Sleep(1000);
                 }
             }
-
-            /* if (fileSaved && !string.IsNullOrEmpty(_emailAddress))
-             {
-                 MailMan.SendReport(_emailAddress, language, theDate, path);
-
-             }
-            */
-
-            
         }
-
 
         public void Alert(Sensor culprit, bool quantity)
         {
@@ -1617,7 +1292,6 @@ namespace Environment_Monitoring_System_Interface
             }
 
             Thread.Sleep(5500);
-
             hellmo.Abort();
         }
 
@@ -1823,37 +1497,6 @@ namespace Environment_Monitoring_System_Interface
         private void sensor8NameBox_TextChanged(object sender, EventArgs e)
         {
             sensor8.name = sensor8NameBox.Text;
-        }
-
-        private void label25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            s1count = 0;
-            s2count = 0;
-            s3count = 0;
-            s4count = 0;
-            s5count = 0;
-            s6count = 0;
-            s7count = 0;
-            s8count = 0;
-
-            pc1.Text = Convert.ToString(s1count);
-            pc2.Text = Convert.ToString(s2count);
-            pc3.Text = Convert.ToString(s3count);
-            pc4.Text = Convert.ToString(s4count);
-            pc5.Text = Convert.ToString(s5count);
-            pc6.Text = Convert.ToString(s6count);
-            pc7.Text = Convert.ToString(s7count);
-            pc8.Text = Convert.ToString(s8count);
         }
     }
 }

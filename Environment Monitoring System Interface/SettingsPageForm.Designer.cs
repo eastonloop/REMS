@@ -251,7 +251,6 @@
             this.minBox.Name = "minBox";
             this.minBox.Size = new System.Drawing.Size(73, 35);
             this.minBox.TabIndex = 13;
-            this.minBox.TextChanged += new System.EventHandler(this.minBox_TextChanged);
             // 
             // maxBox
             // 
@@ -430,7 +429,6 @@
             this.dailyEmailLabel.TabIndex = 29;
             this.dailyEmailLabel.Text = "Would you like to receive\r\ndaily reports?";
             this.dailyEmailLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.dailyEmailLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // yesButton
             // 

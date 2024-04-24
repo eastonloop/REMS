@@ -45,7 +45,7 @@ namespace Environment_Monitoring_System_Interface
                     + ". \n\n";
             }
 
-            message.Attachments.Add(new Attachment(stream, filePath, "text/csv"/*"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"*/));
+            message.Attachments.Add(new Attachment(stream, filePath, "text/csv"));
 
             try
             {
@@ -56,12 +56,12 @@ namespace Environment_Monitoring_System_Interface
             {
                 MessageBox.Show("There was an error: " + ex.Message);
             }
-
         }
 
         public static void SendAlert(string userEmail, bool language, Sensor culprit, bool quantity, bool inequalityB)
         {
-            try { 
+            try 
+            { 
                 if (quantity)
                 {
                     magnitude = culprit.holdHum;
@@ -145,19 +145,6 @@ namespace Environment_Monitoring_System_Interface
             {
                 MessageBox.Show("email blank for some reason" + ex.Message);
             }
-            
-            /*
-            try
-            {
-                smtpClient.Send(message);
-            }
-
-
-            catch (Exception ex)
-            {
-                MessageBox.Show("There was an error: " + ex.Message);
-            }
-            */
         }
 
         public static void SendBat(string userEmail, bool language, Sensor culprit)

@@ -37,17 +37,13 @@ namespace Environment_Monitoring_System_Interface
             string[] comPorts = GetCOMPorts();
 
             foreach (string port in comPorts)
-            //for (int i = 1; i <= 20; i++)
             {
                 if (serialPort1.IsOpen)
                 {
                     return;
                 }
 
-
-
                 serialPort1.PortName = port;
-             //   serialPort1.PortName = "COM10";
                 serialPort1.BaudRate = 9600;
                 serialPort1.DtrEnable = true;
                 serialPort1.DataBits = 8;
@@ -56,22 +52,22 @@ namespace Environment_Monitoring_System_Interface
                 serialPort1.Handshake = Handshake.None;
                 serialPort1.Encoding = System.Text.Encoding.Default;
 
-            try
-            {
-                await Task.Run(() => serialPort1.Open());
-                serialPort1.Write("Z");
+                try
+                {
+                    await Task.Run(() => serialPort1.Open());
+                    serialPort1.Write("Z");
 
-                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
-                var responseTask = ReadResponse();
+                    var timeoutTask = Task.Delay(TimeSpan.FromSeconds(1));
+                    var responseTask = ReadResponse();
 
-                await Task.WhenAny(responseTask, timeoutTask);
+                    await Task.WhenAny(responseTask, timeoutTask);
 
-                    serialPort1.Open();
-                    if(serialPort1.IsOpen) 
-                        isConnectedToCU = true;
-                    if (stop)
-                        serialPort1.DataReceived += SerialPort1_DataReceived;
-                    return;
+                        serialPort1.Open();
+                        if(serialPort1.IsOpen) 
+                            isConnectedToCU = true;
+                        if (stop)
+                            serialPort1.DataReceived += SerialPort1_DataReceived;
+                        return;
                 }
                 catch (Exception ex)
                 {
@@ -149,8 +145,6 @@ namespace Environment_Monitoring_System_Interface
 
         private void continueButton_Click_1(object sender, EventArgs e)
         {
-            //  if (isConnectedToCU)
-            //   {
             HomePageForm form = new HomePageForm
             {
                 SerialPort = serialPort1
@@ -163,7 +157,6 @@ namespace Environment_Monitoring_System_Interface
             form.ShowDialog();
 
             this.Close();
-            //     }
         }
 
         private void Form1_Load(object sender, EventArgs e)

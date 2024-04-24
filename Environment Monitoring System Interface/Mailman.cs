@@ -18,7 +18,7 @@ namespace Environment_Monitoring_System_Interface
         static string bound;
         static string name;
 
-        public static void SendReport(string userEmail, bool language, string date, MemoryStream filePath)
+        public static void SendReport(string userEmail, bool language, string date, MemoryStream stream, string filePath)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.outlook.com")
             {
@@ -45,7 +45,7 @@ namespace Environment_Monitoring_System_Interface
                     + ". \n\n";
             }
 
-            message.Attachments.Add(new Attachment(filePath, "DailyReport.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+            message.Attachments.Add(new Attachment(stream, filePath, "text/csv"/*"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"*/));
 
             try
             {

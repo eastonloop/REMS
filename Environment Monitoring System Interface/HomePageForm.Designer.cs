@@ -145,7 +145,7 @@
             // 
             this.sensor1Label.AutoSize = true;
             this.sensor1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor1Label.Location = new System.Drawing.Point(183, 56);
+            this.sensor1Label.Location = new System.Drawing.Point(189, 56);
             this.sensor1Label.Name = "sensor1Label";
             this.sensor1Label.Size = new System.Drawing.Size(62, 25);
             this.sensor1Label.TabIndex = 1;
@@ -155,7 +155,7 @@
             // 
             this.sensor2Label.AutoSize = true;
             this.sensor2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor2Label.Location = new System.Drawing.Point(296, 56);
+            this.sensor2Label.Location = new System.Drawing.Point(301, 56);
             this.sensor2Label.Name = "sensor2Label";
             this.sensor2Label.Size = new System.Drawing.Size(62, 25);
             this.sensor2Label.TabIndex = 2;
@@ -165,7 +165,7 @@
             // 
             this.sensor3Label.AutoSize = true;
             this.sensor3Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor3Label.Location = new System.Drawing.Point(408, 56);
+            this.sensor3Label.Location = new System.Drawing.Point(413, 56);
             this.sensor3Label.Name = "sensor3Label";
             this.sensor3Label.Size = new System.Drawing.Size(62, 25);
             this.sensor3Label.TabIndex = 3;
@@ -175,7 +175,7 @@
             // 
             this.sensor4Label.AutoSize = true;
             this.sensor4Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor4Label.Location = new System.Drawing.Point(520, 56);
+            this.sensor4Label.Location = new System.Drawing.Point(525, 56);
             this.sensor4Label.Name = "sensor4Label";
             this.sensor4Label.Size = new System.Drawing.Size(62, 25);
             this.sensor4Label.TabIndex = 4;
@@ -195,7 +195,7 @@
             // 
             this.sensor6Label.AutoSize = true;
             this.sensor6Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor6Label.Location = new System.Drawing.Point(744, 56);
+            this.sensor6Label.Location = new System.Drawing.Point(749, 56);
             this.sensor6Label.Name = "sensor6Label";
             this.sensor6Label.Size = new System.Drawing.Size(62, 25);
             this.sensor6Label.TabIndex = 6;
@@ -205,7 +205,7 @@
             // 
             this.sensor7Label.AutoSize = true;
             this.sensor7Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor7Label.Location = new System.Drawing.Point(858, 56);
+            this.sensor7Label.Location = new System.Drawing.Point(861, 56);
             this.sensor7Label.Name = "sensor7Label";
             this.sensor7Label.Size = new System.Drawing.Size(62, 25);
             this.sensor7Label.TabIndex = 7;
@@ -215,7 +215,7 @@
             // 
             this.sensor8Label.AutoSize = true;
             this.sensor8Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sensor8Label.Location = new System.Drawing.Point(968, 56);
+            this.sensor8Label.Location = new System.Drawing.Point(973, 56);
             this.sensor8Label.Name = "sensor8Label";
             this.sensor8Label.Size = new System.Drawing.Size(62, 25);
             this.sensor8Label.TabIndex = 8;
@@ -748,11 +748,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(193, 246);
+            this.label1.Location = new System.Drawing.Point(192, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 32);
             this.label1.TabIndex = 62;
             this.label1.Text = "label1";
+            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -762,6 +763,7 @@
             this.label2.Size = new System.Drawing.Size(92, 32);
             this.label2.TabIndex = 63;
             this.label2.Text = "label2";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -771,6 +773,7 @@
             this.label3.Size = new System.Drawing.Size(92, 32);
             this.label3.TabIndex = 64;
             this.label3.Text = "label3";
+            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -780,6 +783,7 @@
             this.label4.Size = new System.Drawing.Size(92, 32);
             this.label4.TabIndex = 65;
             this.label4.Text = "label4";
+            this.label4.Visible = false;
             // 
             // label5
             // 
@@ -789,6 +793,7 @@
             this.label5.Size = new System.Drawing.Size(92, 32);
             this.label5.TabIndex = 66;
             this.label5.Text = "label5";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -798,6 +803,7 @@
             this.label6.Size = new System.Drawing.Size(92, 32);
             this.label6.TabIndex = 67;
             this.label6.Text = "label6";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -807,6 +813,7 @@
             this.label7.Size = new System.Drawing.Size(92, 32);
             this.label7.TabIndex = 68;
             this.label7.Text = "label7";
+            this.label7.Visible = false;
             // 
             // label8
             // 
@@ -816,6 +823,7 @@
             this.label8.Size = new System.Drawing.Size(92, 32);
             this.label8.TabIndex = 69;
             this.label8.Text = "label8";
+            this.label8.Visible = false;
             // 
             // label9
             // 
@@ -825,6 +833,7 @@
             this.label9.Size = new System.Drawing.Size(92, 32);
             this.label9.TabIndex = 70;
             this.label9.Text = "label9";
+            this.label9.Visible = false;
             // 
             // label10
             // 
@@ -834,6 +843,7 @@
             this.label10.Size = new System.Drawing.Size(108, 32);
             this.label10.TabIndex = 71;
             this.label10.Text = "label10";
+            this.label10.Visible = false;
             // 
             // label11
             // 
@@ -843,6 +853,7 @@
             this.label11.Size = new System.Drawing.Size(108, 32);
             this.label11.TabIndex = 72;
             this.label11.Text = "label11";
+            this.label11.Visible = false;
             // 
             // label12
             // 
@@ -852,6 +863,7 @@
             this.label12.Size = new System.Drawing.Size(108, 32);
             this.label12.TabIndex = 73;
             this.label12.Text = "label12";
+            this.label12.Visible = false;
             // 
             // label13
             // 
@@ -861,6 +873,7 @@
             this.label13.Size = new System.Drawing.Size(108, 32);
             this.label13.TabIndex = 74;
             this.label13.Text = "label13";
+            this.label13.Visible = false;
             // 
             // label14
             // 
@@ -870,6 +883,7 @@
             this.label14.Size = new System.Drawing.Size(108, 32);
             this.label14.TabIndex = 75;
             this.label14.Text = "label14";
+            this.label14.Visible = false;
             // 
             // label15
             // 
@@ -879,6 +893,7 @@
             this.label15.Size = new System.Drawing.Size(108, 32);
             this.label15.TabIndex = 76;
             this.label15.Text = "label15";
+            this.label15.Visible = false;
             // 
             // label16
             // 
@@ -888,6 +903,7 @@
             this.label16.Size = new System.Drawing.Size(108, 32);
             this.label16.TabIndex = 77;
             this.label16.Text = "label16";
+            this.label16.Visible = false;
             // 
             // label17
             // 
@@ -897,6 +913,7 @@
             this.label17.Size = new System.Drawing.Size(108, 32);
             this.label17.TabIndex = 78;
             this.label17.Text = "label17";
+            this.label17.Visible = false;
             // 
             // label18
             // 
@@ -906,6 +923,7 @@
             this.label18.Size = new System.Drawing.Size(108, 32);
             this.label18.TabIndex = 79;
             this.label18.Text = "label18";
+            this.label18.Visible = false;
             // 
             // label19
             // 
@@ -915,6 +933,7 @@
             this.label19.Size = new System.Drawing.Size(108, 32);
             this.label19.TabIndex = 82;
             this.label19.Text = "label19";
+            this.label19.Visible = false;
             // 
             // label20
             // 
@@ -924,6 +943,7 @@
             this.label20.Size = new System.Drawing.Size(108, 32);
             this.label20.TabIndex = 81;
             this.label20.Text = "label20";
+            this.label20.Visible = false;
             // 
             // label21
             // 
@@ -933,6 +953,7 @@
             this.label21.Size = new System.Drawing.Size(108, 32);
             this.label21.TabIndex = 80;
             this.label21.Text = "label21";
+            this.label21.Visible = false;
             // 
             // label22
             // 
@@ -942,6 +963,7 @@
             this.label22.Size = new System.Drawing.Size(108, 32);
             this.label22.TabIndex = 83;
             this.label22.Text = "label22";
+            this.label22.Visible = false;
             // 
             // label23
             // 
@@ -951,6 +973,7 @@
             this.label23.Size = new System.Drawing.Size(108, 32);
             this.label23.TabIndex = 84;
             this.label23.Text = "label23";
+            this.label23.Visible = false;
             // 
             // label24
             // 
@@ -960,6 +983,7 @@
             this.label24.Size = new System.Drawing.Size(108, 32);
             this.label24.TabIndex = 85;
             this.label24.Text = "label24";
+            this.label24.Visible = false;
             // 
             // label25
             // 
@@ -970,6 +994,7 @@
             this.label25.Size = new System.Drawing.Size(190, 25);
             this.label25.TabIndex = 86;
             this.label25.Text = "Messages Delivered";
+            this.label25.Visible = false;
             this.label25.Click += new System.EventHandler(this.label25_Click);
             // 
             // label26
@@ -981,6 +1006,7 @@
             this.label26.Size = new System.Drawing.Size(197, 25);
             this.label26.TabIndex = 87;
             this.label26.Text = "Attempted Messages";
+            this.label26.Visible = false;
             this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // label27
@@ -992,6 +1018,7 @@
             this.label27.Size = new System.Drawing.Size(121, 25);
             this.label27.TabIndex = 88;
             this.label27.Text = "Total Retries";
+            this.label27.Visible = false;
             // 
             // label28
             // 
@@ -1002,6 +1029,7 @@
             this.label28.Size = new System.Drawing.Size(165, 25);
             this.label28.TabIndex = 89;
             this.label28.Text = "PC GUI Recevied";
+            this.label28.Visible = false;
             // 
             // pc1
             // 
@@ -1011,6 +1039,7 @@
             this.pc1.Size = new System.Drawing.Size(108, 32);
             this.pc1.TabIndex = 90;
             this.pc1.Text = "label29";
+            this.pc1.Visible = false;
             // 
             // pc2
             // 
@@ -1020,6 +1049,7 @@
             this.pc2.Size = new System.Drawing.Size(108, 32);
             this.pc2.TabIndex = 91;
             this.pc2.Text = "label30";
+            this.pc2.Visible = false;
             // 
             // pc3
             // 
@@ -1029,6 +1059,7 @@
             this.pc3.Size = new System.Drawing.Size(108, 32);
             this.pc3.TabIndex = 92;
             this.pc3.Text = "label31";
+            this.pc3.Visible = false;
             // 
             // pc4
             // 
@@ -1038,6 +1069,7 @@
             this.pc4.Size = new System.Drawing.Size(108, 32);
             this.pc4.TabIndex = 93;
             this.pc4.Text = "label32";
+            this.pc4.Visible = false;
             // 
             // pc5
             // 
@@ -1047,6 +1079,7 @@
             this.pc5.Size = new System.Drawing.Size(108, 32);
             this.pc5.TabIndex = 94;
             this.pc5.Text = "label33";
+            this.pc5.Visible = false;
             // 
             // pc6
             // 
@@ -1056,6 +1089,7 @@
             this.pc6.Size = new System.Drawing.Size(108, 32);
             this.pc6.TabIndex = 95;
             this.pc6.Text = "label34";
+            this.pc6.Visible = false;
             // 
             // pc7
             // 
@@ -1065,6 +1099,7 @@
             this.pc7.Size = new System.Drawing.Size(108, 32);
             this.pc7.TabIndex = 96;
             this.pc7.Text = "label35";
+            this.pc7.Visible = false;
             // 
             // pc8
             // 
@@ -1074,6 +1109,7 @@
             this.pc8.Size = new System.Drawing.Size(108, 32);
             this.pc8.TabIndex = 97;
             this.pc8.Text = "label36";
+            this.pc8.Visible = false;
             // 
             // button1
             // 
@@ -1084,6 +1120,7 @@
             this.button1.TabIndex = 98;
             this.button1.Text = "Reset PC Count";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // HomePageForm

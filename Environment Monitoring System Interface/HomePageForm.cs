@@ -194,12 +194,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp1Box.Invoke((MethodInvoker)delegate
                     {
-                        temp1Box.Text = Convert.ToString(Math.Round(sensor1.holdTemp));
+                        temp1Box.Text = Convert.ToString(sensor1.holdTemp);
                     });
 
                     hum1Box.Invoke((MethodInvoker)delegate
                     {
-                        hum1Box.Text = Convert.ToString(Math.Round(sensor1.holdHum));
+                        hum1Box.Text = Convert.ToString(sensor1.holdHum);
                     });
 
                     bat1Label.Invoke((MethodInvoker)delegate
@@ -222,7 +222,6 @@ namespace Environment_Monitoring_System_Interface
                     });
                     
                     sensor1Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor1.esm == 1)
                         sensor1Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -265,12 +264,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp2Box.Invoke((MethodInvoker)delegate
                     {
-                        temp2Box.Text = Convert.ToString(Math.Round(sensor2.holdTemp));
+                        temp2Box.Text = Convert.ToString(sensor2.holdTemp);
                     });
 
                     hum2Box.Invoke((MethodInvoker)delegate
                     {
-                        hum2Box.Text = Convert.ToString(Math.Round(sensor2.holdHum));
+                        hum2Box.Text = Convert.ToString(sensor2.holdHum);
                     });
 
                     bat2Label.Invoke((MethodInvoker)delegate
@@ -293,7 +292,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor2Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     sensor2Label.Invoke((MethodInvoker)delegate
                     {
@@ -339,12 +337,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp3Box.Invoke((MethodInvoker)delegate
                     {
-                        temp3Box.Text = Convert.ToString(Math.Round(sensor3.holdTemp));
+                        temp3Box.Text = Convert.ToString(sensor3.holdTemp);
                     });
 
                     hum3Box.Invoke((MethodInvoker)delegate
                     {
-                        hum3Box.Text = Convert.ToString(Math.Round(sensor3.holdHum));
+                        hum3Box.Text = Convert.ToString(sensor3.holdHum);
                     });
                     
                     bat3Label.Invoke((MethodInvoker)delegate
@@ -367,7 +365,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor3Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor3.esm == 1)
                         sensor3Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -410,12 +407,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp4Box.Invoke((MethodInvoker)delegate
                     {
-                        temp4Box.Text = Convert.ToString(Math.Round(sensor4.holdTemp));
+                        temp4Box.Text = Convert.ToString(sensor4.holdTemp);
                     });
 
                     hum4Box.Invoke((MethodInvoker)delegate
                     {
-                        hum4Box.Text = Convert.ToString(Math.Round(sensor4.holdHum));
+                        hum4Box.Text = Convert.ToString(sensor4.holdHum);
                     });
 
                     bat4Label.Invoke((MethodInvoker)delegate
@@ -438,7 +435,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor4Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor4.esm == 1)
                         sensor4Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -481,7 +477,7 @@ namespace Environment_Monitoring_System_Interface
 
                     temp5Box.Invoke((MethodInvoker)delegate
                     {
-                        temp5Box.Text = Convert.ToString(Math.Round(sensor5.holdTemp));
+                        temp5Box.Text = Convert.ToString(sensor5.holdTemp);
                     });
 
                     hum5Box.Invoke((MethodInvoker)delegate
@@ -509,7 +505,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor5Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor5.esm == 1)
                         sensor5Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -552,12 +547,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp6Box.Invoke((MethodInvoker)delegate
                     {
-                        temp6Box.Text = Convert.ToString(Math.Round(sensor6.holdTemp));
+                        temp6Box.Text = Convert.ToString(sensor6.holdTemp);
                     });
 
                     hum6Box.Invoke((MethodInvoker)delegate
                     {
-                        hum6Box.Text = Convert.ToString(Math.Round(sensor6.holdHum));
+                        hum6Box.Text = Convert.ToString(sensor6.holdHum);
                     });
 
                     bat6Label.Invoke((MethodInvoker)delegate
@@ -580,7 +575,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor6Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor6.esm == 1)
                         sensor6Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -623,7 +617,7 @@ namespace Environment_Monitoring_System_Interface
 
                     temp7Box.Invoke((MethodInvoker)delegate
                     {
-                        temp7Box.Text = Convert.ToString(Math.Round(sensor7.holdTemp));
+                        temp7Box.Text = Convert.ToString(sensor7.holdTemp);
                     });
 
                     hum7Box.Invoke((MethodInvoker)delegate
@@ -651,7 +645,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor7Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor7.esm == 1)
                         sensor7Label.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -694,12 +687,12 @@ namespace Environment_Monitoring_System_Interface
 
                     temp8Box.Invoke((MethodInvoker)delegate
                     {
-                        temp8Box.Text = Convert.ToString(Math.Round(sensor8.holdTemp));
+                        temp8Box.Text = Convert.ToString(sensor8.holdTemp);
                     });
 
                     hum8Box.Invoke((MethodInvoker)delegate
                     {
-                        hum8Box.Text = Convert.ToString(Math.Round(sensor8.holdHum));
+                        hum8Box.Text = Convert.ToString(sensor8.holdHum);
                     });
 
                     bat8Label.Invoke((MethodInvoker)delegate
@@ -722,7 +715,6 @@ namespace Environment_Monitoring_System_Interface
                     });
 
                     sensor8Label.BackColor = sensorFeedLabel.BackColor;
-                    Thread.Sleep(500);
 
                     if (sensor8.esm == 1)
                         sensor8Label.BackColor = System.Drawing.Color.CornflowerBlue;
